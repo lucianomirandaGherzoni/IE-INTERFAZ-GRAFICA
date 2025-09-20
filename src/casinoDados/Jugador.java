@@ -4,23 +4,26 @@
  */
 package casinoDados;
 
-//import java.util.*;
-
 abstract class Jugador {
-    public String nombre;
 
+    public String nombre;
+    public String apodo;
     public int dinero;
     public int partidasGanadas;
-    
-    public Jugador(String nombre){
+
+    public Jugador(String nombre, String apodo) {
         this.nombre = nombre;
-   
+        this.apodo = apodo;
         this.dinero = 100;
         this.partidasGanadas = 0;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public void setApodo(String apodo) {
+        this.apodo = apodo;
     }
 
     public void setDinero(int dinero) {
@@ -34,7 +37,9 @@ abstract class Jugador {
     public String getNombre() {
         return nombre;
     }
-
+    public String getApodo() {
+        return apodo;
+    }
     public int getDinero() {
         return dinero;
     }
@@ -42,24 +47,25 @@ abstract class Jugador {
     public int getPartidasGanadas() {
         return partidasGanadas;
     }
-    
+
     //Métodos comunes
-    public void ganar (int cantidad){
+    public void ganar(int cantidad) {
         this.dinero += cantidad;
         partidasGanadas++;
     }
-    
-    public void perder (int cantidad){
+
+    public void perder(int cantidad) {
         this.dinero -= cantidad;
     }
-    
+
     //Métodos abstractos
     public abstract int calcularApuesta();
-    public abstract String obtenerTipoJugador(); 
-    
+
+    public abstract String obtenerTipoJugador();
+
     @Override
     public String toString() {
-        return nombre + " (" + obtenerTipoJugador() + ") - $" + dinero + " - Partidas ganadas: " + partidasGanadas;
+        return nombre +"Apodo:" + apodo + " (" + obtenerTipoJugador() + ") - $" + dinero + " - Partidas ganadas: " + partidasGanadas;
     }
-    
+
 }
