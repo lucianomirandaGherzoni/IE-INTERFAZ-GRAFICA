@@ -8,12 +8,13 @@ package casinoDados;
 
 abstract class Jugador {
     public String nombre;
-    public String apodo;
+
     public int dinero;
     public int partidasGanadas;
     
     public Jugador(String nombre){
         this.nombre = nombre;
+   
         this.dinero = 100;
         this.partidasGanadas = 0;
     }
