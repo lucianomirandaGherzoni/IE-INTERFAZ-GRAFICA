@@ -35,54 +35,73 @@ public class CasinoDados {
     }
 
 
-    public static void main(String[] args) {
+ public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-    CasinoAdministrador casino = new CasinoAdministrador();
+    boolean seguir = true;
 
-    System.out.println("¡Bienvenidos al Casino de Dados!");
+    while (seguir) {
+        CasinoAdministrador casino = new CasinoAdministrador();
 
-    // Crear jugadores
-    System.out.print("¿Cuántos jugadores participarán? (2-4): ");
-    int n = scanner.nextInt();
-    scanner.nextLine();
-
-    // 👉 NUEVO: guardamos los nombres ingresados para el historial
-    List<String> nombres = new ArrayList<>();
-
-    for (int i = 1; i <= n; i++) {
-        System.out.print("Nombre del jugador " + i + ": ");
-        String nombre = scanner.nextLine();
-        System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
-        int tipo = scanner.nextInt();
+        System.out.println("¡Bienvenidos al Casino de Dados!");
+        System.out.print("¿Cuántos jugadores participarán? (2-4): ");
+        int n = scanner.nextInt();
         scanner.nextLine();
 
-        Jugador jugador = casino.crearJugador(nombre, tipo);
-        casino.agregarJugador(jugador);
+        List<String> nombres = new ArrayList<>();
+        List<Jugador> jugadoresLocal = new ArrayList<>();
 
-        // 👉 NUEVO: agregamos el nombre a la lista local
-        nombres.add(nombre);
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Nombre del jugador " + i + ": ");
+            String nombre = scanner.nextLine();
+            System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
+            int tipo = scanner.nextInt();
+            scanner.nextLine();
+
+            Jugador jugador = casino.crearJugador(nombre, tipo);
+            casino.agregarJugador(jugador);
+
+            nombres.add(nombre);
+            jugadoresLocal.add(jugador);
+        }
+
+        casino.jugar();
+
+        // ===== Guardar en historial =====
+        contadorPartidas++;
+        String jugadoresCSV = String.join(",", nombres);
+
+        int maxWins = -1;
+        List<String> ganadores = new ArrayList<>();
+        for (Jugador j : jugadoresLocal) {
+            int w = j.getPartidasGanadas();
+            if (w > maxWins) { maxWins = w; ganadores.clear(); ganadores.add(j.getNombre()); }
+            else if (w == maxWins) { ganadores.add(j.getNombre()); }
+        }
+        String ganador = (ganadores.size() == 1) ? ganadores.get(0) : "Empate";
+
+        int rondas = 0;
+        for (Jugador j : jugadoresLocal) rondas += j.getPartidasGanadas();
+
+        StringBuilder sb = new StringBuilder()
+            .append("PARTIDA #").append(contadorPartidas)
+            .append(" - Jugadores: ").append(jugadoresCSV)
+            .append(" | Ganador: ").append(ganador)
+            .append(" | Rondas: ").append(rondas);
+
+        guardarPartida(sb.toString());
+        mostrarHistorial();
+        // ================================
+
+        // 🔹 Preguntar si seguir
+        System.out.print("\n¿Quieren jugar otra partida? (s/n): ");
+        String respuesta = scanner.nextLine().trim().toLowerCase();
+        if (!respuesta.equals("s")) {
+            seguir = false;
+        }
     }
-
-    casino.jugar();
-
-    // 👉 Usamos los nombres reales
-    contadorPartidas++;
-    String jugadoresCSV = String.join(",", nombres);
-
-    // TODO: reemplazar con datos reales si tu CasinoAdministrador los expone
-    String ganador = "(desconocido)";
-    int rondas = 3;
-
-    StringBuilder sb = new StringBuilder();
-    sb.append("PARTIDA #").append(contadorPartidas)
-      .append(" - Jugadores: ").append(jugadoresCSV)
-      .append(" | Ganador: ").append(ganador)
-      .append(" | Rondas: ").append(rondas);
-
-    guardarPartida(sb.toString());
-    mostrarHistorial();
 
     scanner.close();
 }
+  
     
 }
