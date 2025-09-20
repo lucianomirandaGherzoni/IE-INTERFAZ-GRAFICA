@@ -58,6 +58,21 @@ public class CasinoDados {
         }
         
         casino.jugar();
+        
+        contadorPartidas++;
+        String jugadoresCSV = "Juan,Ana,Carlos";  // TODO: reemplazar con nombres reales desde CasinoAdministrador
+        String ganador = "Juan";                  // TODO: reemplazar con ganador real
+        int rondas = 3;                            // TODO: reemplazar con rondas reales
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("PARTIDA #").append(contadorPartidas)
+                .append(" - Jugadores: ").append(jugadoresCSV)
+                .append(" | Ganador: ").append(ganador)
+                .append(" | Rondas: ").append(rondas);
+
+        guardarPartida(sb.toString());
+        mostrarHistorial();
+
         scanner.close();
     }
     
