@@ -8,6 +8,7 @@ package casinoDados;
 
 abstract class Jugador {
     public String nombre;
+    public String apodo;
     public int dinero;
     public int partidasGanadas;
     
