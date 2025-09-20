@@ -22,7 +22,7 @@ public class CasinoDados {
         for (int i = 1; i <= n; i++) {
             System.out.print("Nombre del jugador " + i + ": ");
             String nombre = scanner.nextLine();
-            System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
+            System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP, 4=Casino): ");
             int tipo = scanner.nextInt();
             scanner.nextLine();
             

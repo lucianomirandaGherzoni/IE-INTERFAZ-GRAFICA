@@ -27,4 +27,13 @@ class JugadorCasino extends Jugador{
     public String obtenerTipoJugador() {
         return "Casino";
     }
+    
+    //Habilidades tramposas
+    public boolean intentarDadosCargados(){
+        return random.nextDouble() < PROBABILIDAD_DADOS_CARGADOS;
+    }
+    
+    public boolean intentarConfundirJugador() {
+        return random.nextDouble() < PROBABILIDAD_CONFUNDIR;
+    }
 }

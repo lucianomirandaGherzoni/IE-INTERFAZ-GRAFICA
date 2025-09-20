@@ -7,8 +7,8 @@ package casinoDados;
 import java.util.ArrayList;
 
 class CasinoAdministrador {
-    private final ArrayList<Jugador> jugadores = new ArrayList<>();
-    private final juegoDados juego = new juegoDados();
+    private ArrayList<Jugador> jugadores = new ArrayList<>();
+    private juegoDados juego;
     private RegistroTrampas registroTrampas = new RegistroTrampas();
     
     public Jugador crearJugador(String nombre, int tipo) {
@@ -16,6 +16,7 @@ class CasinoAdministrador {
             case 1 -> new JugadorNovato(nombre);
             case 2 -> new JugadorExperto(nombre);
             case 3 -> new JugadorVIP(nombre);
+            case 4 -> new JugadorCasino(nombre);
             default -> new JugadorNovato(nombre);
         };
     }
@@ -25,6 +26,18 @@ class CasinoAdministrador {
     }
     
     public void jugar (){
+        // Buscar si hay JugadorCasino
+        JugadorCasino casino = null;
+        for (Jugador j : jugadores) {
+            if (j instanceof JugadorCasino) {
+                casino = (JugadorCasino) j;
+                break;
+            }
+        }
+        
+        // Crear JuegoDados con los datos necesarios
+        juego = new juegoDados();
+        
         for (int ronda = 1; ronda <= 3; ronda++) {
             System.out.println("\nRONDA " + ronda);
             
@@ -56,7 +69,7 @@ class CasinoAdministrador {
             ArrayList<Jugador> ganadores = new ArrayList<>();
             
             for (Jugador j : jugadoresActivos) {
-                int puntaje = juego.lanzarDados(j);
+                int puntaje = juego.lanzarDados(j, casino, registroTrampas);
                 if (puntaje > mejorPuntaje) {
                     mejorPuntaje = puntaje;
                     ganadores.clear();
