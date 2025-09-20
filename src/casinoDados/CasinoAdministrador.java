@@ -9,6 +9,7 @@ import java.util.ArrayList;
 class CasinoAdministrador {
     private final ArrayList<Jugador> jugadores = new ArrayList<>();
     private final juegoDados juego = new juegoDados();
+    private RegistroTrampas registroTrampas = new RegistroTrampas();
     
     public Jugador crearJugador(String nombre, int tipo) {
         return switch (tipo) {
@@ -84,4 +85,8 @@ class CasinoAdministrador {
             System.out.println(j.getNombre() + " (" + j.obtenerTipoJugador() + "): $" + j.getDinero() + " - Ganadas: " + j.getPartidasGanadas());
         }
     }
+    
+    public RegistroTrampas getRegistroTrampas (){
+        return registroTrampas;
+    } 
 }
