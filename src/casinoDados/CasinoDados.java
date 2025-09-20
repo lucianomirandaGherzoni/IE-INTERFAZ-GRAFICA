@@ -13,6 +13,27 @@ public class CasinoDados {
 
 // Contador para numerar partidas
     private static int contadorPartidas = 0;
+    
+    // Guarda una línea en el historial con tope 5
+    private static void guardarPartida(String detalle) {
+        if (HISTORIAL.size() == 5) {
+            HISTORIAL.removeFirst();
+        }
+        HISTORIAL.addLast(detalle);
+    }
+
+// Muestra historial por consola
+    private static void mostrarHistorial() {
+        System.out.println("\n--- HISTORIAL RECIENTE ---");
+        if (HISTORIAL.isEmpty()) {
+            System.out.println("(vacío)");
+            return;
+        }
+        for (String entrada : HISTORIAL) {
+            System.out.println(entrada);
+        }
+    }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
