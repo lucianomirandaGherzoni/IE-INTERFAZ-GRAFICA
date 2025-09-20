@@ -36,44 +36,53 @@ public class CasinoDados {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        CasinoAdministrador casino = new CasinoAdministrador();
-        
-        System.out.println("¡Bienvenidos al Casino de Dados!");
-        
-        // Crear jugadores
-        System.out.print("¿Cuántos jugadores participarán? (2-4): ");
-        int n = scanner.nextInt();
+    Scanner scanner = new Scanner(System.in);
+    CasinoAdministrador casino = new CasinoAdministrador();
+
+    System.out.println("¡Bienvenidos al Casino de Dados!");
+
+    // Crear jugadores
+    System.out.print("¿Cuántos jugadores participarán? (2-4): ");
+    int n = scanner.nextInt();
+    scanner.nextLine();
+
+    // 👉 NUEVO: guardamos los nombres ingresados para el historial
+    List<String> nombres = new ArrayList<>();
+
+    for (int i = 1; i <= n; i++) {
+        System.out.print("Nombre del jugador " + i + ": ");
+        String nombre = scanner.nextLine();
+        System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
+        int tipo = scanner.nextInt();
         scanner.nextLine();
-        
-        for (int i = 1; i <= n; i++) {
-            System.out.print("Nombre del jugador " + i + ": ");
-            String nombre = scanner.nextLine();
-            System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
-            int tipo = scanner.nextInt();
-            scanner.nextLine();
-            
-            Jugador jugador = casino.crearJugador(nombre, tipo);
-            casino.agregarJugador(jugador);
-        }
-        
-        casino.jugar();
-        
-        contadorPartidas++;
-        String jugadoresCSV = "Juan,Ana,Carlos";  // TODO: reemplazar con nombres reales desde CasinoAdministrador
-        String ganador = "Juan";                  // TODO: reemplazar con ganador real
-        int rondas = 3;                            // TODO: reemplazar con rondas reales
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("PARTIDA #").append(contadorPartidas)
-                .append(" - Jugadores: ").append(jugadoresCSV)
-                .append(" | Ganador: ").append(ganador)
-                .append(" | Rondas: ").append(rondas);
+        Jugador jugador = casino.crearJugador(nombre, tipo);
+        casino.agregarJugador(jugador);
 
-        guardarPartida(sb.toString());
-        mostrarHistorial();
-
-        scanner.close();
+        // 👉 NUEVO: agregamos el nombre a la lista local
+        nombres.add(nombre);
     }
+
+    casino.jugar();
+
+    // 👉 Usamos los nombres reales
+    contadorPartidas++;
+    String jugadoresCSV = String.join(",", nombres);
+
+    // TODO: reemplazar con datos reales si tu CasinoAdministrador los expone
+    String ganador = "(desconocido)";
+    int rondas = 3;
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("PARTIDA #").append(contadorPartidas)
+      .append(" - Jugadores: ").append(jugadoresCSV)
+      .append(" | Ganador: ").append(ganador)
+      .append(" | Rondas: ").append(rondas);
+
+    guardarPartida(sb.toString());
+    mostrarHistorial();
+
+    scanner.close();
+}
     
 }
