@@ -7,6 +7,12 @@ package casinoDados;
 import java.util.*;
 
 public class CasinoDados {
+    
+        // 🔹 Historial de las últimas 5 partidas
+    private static final Deque<String> HISTORIAL = new ArrayDeque<>(5);
+
+// Contador para numerar partidas
+    private static int contadorPartidas = 0;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
