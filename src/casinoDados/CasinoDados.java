@@ -34,50 +34,51 @@ public class CasinoDados {
         }
     }
     
-   private static void imprimirReporteFinal(List<Jugador> jugadores, int partidas) {
-    StringBuilder rep = new StringBuilder();
+    private static void imprimirReporteFinal(List<Jugador> jugadores, int partidas) {
+        StringBuilder rep = new StringBuilder();
 
-    rep.append("\n=======================================\n");
-    rep.append(" REPORTE FINAL DEL CASINO\n");
-    rep.append("=======================================\n");
+        rep.append("\n=======================================\n");
+        rep.append(" REPORTE FINAL DEL CASINO\n");
+        rep.append("=======================================\n");
 
-    rep.append("Jugadores participantes: ").append(jugadores.size()).append("\n");
-    rep.append("Total de partidas jugadas: ").append(partidas).append("\n");
+        rep.append("Jugadores participantes: ").append(jugadores.size()).append("\n");
+        rep.append("Total de partidas jugadas: ").append(partidas).append("\n");
 
-    // --- RANKING FINAL ---
-    rep.append("--- RANKING FINAL ---\n");
-    List<Jugador> ranking = new ArrayList<>(jugadores);
-    ranking.sort((a, b) -> {
-        int cmp = Integer.compare(b.getDinero(), a.getDinero());
-        return (cmp != 0) ? cmp : Integer.compare(b.getPartidasGanadas(), a.getPartidasGanadas());
-    });
+        // --- RANKING FINAL ---
+        rep.append("--- RANKING FINAL ---\n");
+        List<Jugador> ranking = new ArrayList<>(jugadores);
+        ranking.sort((a, b) -> {
+            int cmp = Integer.compare(b.getDinero(), a.getDinero());
+            return (cmp != 0) ? cmp : Integer.compare(b.getPartidasGanadas(), a.getPartidasGanadas());
+        });
 
-    int pos = 1;
-    for (Jugador j : ranking) {
-        rep.append(pos++).append(". ")
-           .append(j.getApodo()).append(" (").append(j.obtenerTipoJugador()).append(") - $")
-           .append(j.getDinero()).append(" - ")
-           .append(j.getPartidasGanadas()).append(" victorias\n");
+        int pos = 1;
+        for (Jugador j : ranking) {
+            rep.append(pos++).append(". ")
+                    .append(j.getApodo()).append(" (").append(j.obtenerTipoJugador()).append(") - $")
+                    .append(j.getDinero()).append(" - ")
+                    .append(j.getPartidasGanadas()).append(" victorias\n");
+        }
+
+        // --- Estadísticas (pendientes) ---
+        rep.append("--- ESTADÍSTICAS GENERALES ---\n");
+        rep.append("Mayor apuesta realizada: (pendiente)\n");
+        rep.append("Mejor puntaje de dados: (pendiente)\n");
+        rep.append("Víctimas del casino: (pendiente)\n");
+
+        // --- Historial (pendiente) ---
+        rep.append("--- HISTORIAL RECIENTE ---\n");
+        rep.append("(pendiente)\n");
+
+        rep.append("=======================================\n");
+        System.out.println(rep.toString());
     }
-
-    // --- Estadísticas (pendientes) ---
-    rep.append("--- ESTADÍSTICAS GENERALES ---\n");
-    rep.append("Mayor apuesta realizada: (pendiente)\n");
-    rep.append("Mejor puntaje de dados: (pendiente)\n");
-    rep.append("Víctimas del casino: (pendiente)\n");
-
-    // --- Historial (pendiente) ---
-    rep.append("--- HISTORIAL RECIENTE ---\n");
-    rep.append("(pendiente)\n");
-
-    rep.append("=======================================\n");
-    System.out.println(rep.toString());
-}
 
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean seguir = true;
+            List<Jugador> ultimoPlantel = Collections.emptyList();
 
         while (seguir) {
             CasinoAdministrador casino = new CasinoAdministrador();
@@ -157,6 +158,7 @@ public class CasinoDados {
             guardarPartida(sb.toString());
             mostrarHistorial();
             // ================================
+                  ultimoPlantel = new ArrayList<>(jugadoresLocal);
 
             // 🔹 Preguntar si seguir
             System.out.print("\n¿Quieren jugar otra partida? (s/n): ");
@@ -166,7 +168,8 @@ public class CasinoDados {
             }
         }
         // Al final del juego, mostrar el reporte final
-        imprimirReporteFinal();
+          imprimirReporteFinal(ultimoPlantel, contadorPartidas);
+
 
         scanner.close();
     }
