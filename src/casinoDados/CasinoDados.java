@@ -8,10 +8,10 @@ import java.util.*;
 
 public class CasinoDados {
 
-    //  Historial de las últimas 5 partidas
+
     private static final Deque<String> HISTORIAL = new ArrayDeque<>(5);
 
-// Contador para numerar partidas 
+
     private static int contadorPartidas = 0;
 
     // Guarda una línea en el historial con tope 5
@@ -32,6 +32,32 @@ public class CasinoDados {
         for (String entrada : HISTORIAL) {
             System.out.println(entrada);
         }
+    }
+    
+    private static void imprimirReporteFinal() {
+        StringBuilder rep = new StringBuilder();
+
+        rep.append("\n=======================================\n");
+        rep.append(" REPORTE FINAL DEL CASINO\n");
+        rep.append("=======================================\n");
+
+        rep.append("Jugadores participantes: (pendiente)\n");
+        rep.append("Total de partidas jugadas: (pendiente)\n");
+
+        rep.append("--- RANKING FINAL ---\n");
+        rep.append("(pendiente)\n");
+
+        rep.append("--- ESTADÍSTICAS GENERALES ---\n");
+        rep.append("Mayor apuesta realizada: (pendiente)\n");
+        rep.append("Mejor puntaje de dados: (pendiente)\n");
+        rep.append("Víctimas del casino: (pendiente)\n");
+
+        rep.append("--- HISTORIAL RECIENTE ---\n");
+        rep.append("(pendiente)\n");
+
+        rep.append("=======================================\n");
+
+        System.out.println(rep.toString());
     }
 
     public static void main(String[] args) {
@@ -124,6 +150,8 @@ public class CasinoDados {
                 seguir = false;
             }
         }
+        // Al final del juego, mostrar el reporte final
+        imprimirReporteFinal();
 
         scanner.close();
     }
