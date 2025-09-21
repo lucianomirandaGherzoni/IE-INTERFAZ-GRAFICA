@@ -34,100 +34,100 @@ public class CasinoDados {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean seguir = true;
+public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    boolean seguir = true;
 
-        while (seguir) {
-            CasinoAdministrador casino = new CasinoAdministrador();
+    while (seguir) {
+        CasinoAdministrador casino = new CasinoAdministrador();
 
-            System.out.println("¡Bienvenidos al Casino de Dados!");
-            System.out.print("¿Cuántos jugadores participarán? (2-4): ");
-            int n = scanner.nextInt();
-            scanner.nextLine();
+        System.out.println("¡Bienvenidos al Casino de Dados!");
 
-            List<String> nombres = new ArrayList<>();
-            List<Jugador> jugadoresLocal = new ArrayList<>();
+        // Crear jugadores
+        System.out.print("¿Cuántos jugadores participarán? (2-4): ");
+        int n = scanner.nextInt();
+        scanner.nextLine();
 
-            for (int i = 1; i <= n; i++) {
-                System.out.print("Nombre del jugador " + i + ": ");
-                String nombre = scanner.nextLine();
+        List<String> nombres = new ArrayList<>();
+        List<Jugador> jugadoresLocal = new ArrayList<>();
 
-                //------- Agregar Apodo ---------
-                String apodo;
-                boolean apodoValido = false;
-                Jugador jugador = null;
-                
-                //bucle while para validar el apodo.
-                while (!apodoValido) {
-                    System.out.print("Ingrese su Apodo (entre 3-10 caracteres, solo letras y espacios): ");
-                    apodo = scanner.nextLine();
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Nombre del jugador " + i + ": ");
+            String nombre = scanner.nextLine();
 
-                    if (validarApodo(apodo)) {
-                        System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
-                        int tipo = scanner.nextInt();
-                        scanner.nextLine();
-                        
-                        // Se asigna el objeto jugador cuando el apodo es válido.
-                        jugador = casino.crearJugador(nombre, tipo);
-                        jugador.setApodo(apodo);
-                        casino.agregarJugador(jugador);
-                        apodoValido = true;
-                    } else {
-                        System.out.println("¡Error! El apodo no es válido. Inténtalo de nuevo.");
-                    }
-                }
-                                  
-                nombres.add(nombre);
-                jugadoresLocal.add(jugador);
-            }
+            //------- Agregar Apodo ---------
+            String apodo;
+            boolean apodoValido = false;
+            Jugador jugador = null;
 
-            casino.jugar();
+            //bucle while para validar el apodo.
+            while (!apodoValido) {
+                System.out.print("Ingrese su Apodo (entre 3-10 caracteres, solo letras y espacios): ");
+                apodo = scanner.nextLine();
 
-            // ===== Guardar en historial =====
-            contadorPartidas++;
-            String jugadoresCSV = String.join(",", nombres);
+                if (validarApodo(apodo)) {
+                    System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
+                    int tipo = scanner.nextInt();
+                    scanner.nextLine();
 
-            int maxWins = -1;
-            List<String> ganadores = new ArrayList<>();
-            for (Jugador j : jugadoresLocal) {
-                int w = j.getPartidasGanadas();
-                if (w > maxWins) {
-                    maxWins = w;
-                    ganadores.clear();
-                    ganadores.add(j.getNombre());
-                } else if (w == maxWins) {
-                    ganadores.add(j.getNombre());
+                    // Se asigna el objeto jugador cuando el apodo es válido.
+                    jugador = casino.crearJugador(nombre, tipo);
+                    jugador.setApodo(apodo);
+                    casino.agregarJugador(jugador);
+                    apodoValido = true;
+                } else {
+                    System.out.println("¡Error! El apodo no es válido. Inténtalo de nuevo.");
                 }
             }
-            String ganador = (ganadores.size() == 1) ? ganadores.get(0) : "Empate";
-
-            int rondas = 0;
-            for (Jugador j : jugadoresLocal) {
-                rondas += j.getPartidasGanadas();
-            }
-
-            StringBuilder sb = new StringBuilder()
-                    .append("PARTIDA #").append(contadorPartidas)
-                    .append(" - Jugadores: ").append(jugadoresCSV)
-                    .append(" | Ganador: ").append(ganador)
-                    .append(" | Rondas: ").append(rondas);
-
-            guardarPartida(sb.toString());
-            mostrarHistorial();
-            // ================================
-
-            // 🔹 Preguntar si seguir
-            System.out.print("\n¿Quieren jugar otra partida? (s/n): ");
-            String respuesta = scanner.nextLine().trim().toLowerCase();
-            if (!respuesta.equals("s")) {
-                seguir = false;
-            }
+            nombres.add(nombre);
+            jugadoresLocal.add(jugador);
         }
 
-        scanner.close();
+        casino.jugar();
+
+        // ===== Guardar en historial =====
+        contadorPartidas++;
+        String jugadoresCSV = String.join(",", nombres);
+
+        int maxWins = -1;
+        List<String> ganadores = new ArrayList<>();
+        for (Jugador j : jugadoresLocal) {
+            int w = j.getPartidasGanadas();
+            if (w > maxWins) {
+                maxWins = w;
+                ganadores.clear();
+                ganadores.add(j.getNombre());
+            } else if (w == maxWins) {
+                ganadores.add(j.getNombre());
+            }
+        }
+        String ganador = (ganadores.size() == 1) ? ganadores.get(0) : "Empate";
+
+        int rondas = 0;
+        for (Jugador j : jugadoresLocal) {
+            rondas += j.getPartidasGanadas();
+        }
+
+        StringBuilder sb = new StringBuilder()
+                .append("PARTIDA #").append(contadorPartidas)
+                .append(" - Jugadores: ").append(jugadoresCSV)
+                .append(" | Ganador: ").append(ganador)
+                .append(" | Rondas: ").append(rondas);
+
+        guardarPartida(sb.toString());
+        mostrarHistorial();
+        // ================================
+
+        // 🔹 Preguntar si seguir
+        System.out.print("\n¿Quieren jugar otra partida? (s/n): ");
+        String respuesta = scanner.nextLine().trim().toLowerCase();
+        if (!respuesta.equals("s")) {
+            seguir = false;
+        }
     }
 
+    scanner.close();
+}
     //----Validacion de Apodo Metodo para validar si un apodo cumple con los requisitos.
     public static boolean validarApodo(String apodo) {
         if (apodo == null || apodo.isEmpty()) {
