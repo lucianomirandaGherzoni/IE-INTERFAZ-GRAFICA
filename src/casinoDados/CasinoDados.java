@@ -66,9 +66,16 @@ public class CasinoDados {
         rep.append("Mejor puntaje de dados: (pendiente)\n");
         rep.append("Víctimas del casino: (pendiente)\n");
 
-        // --- Historial (pendiente) ---
-        rep.append("--- HISTORIAL RECIENTE ---\n");
-        rep.append("(pendiente)\n");
+// --- HISTORIAL RECIENTE ---
+    rep.append("--- HISTORIAL RECIENTE ---\n");
+        if (HISTORIAL.isEmpty()) {
+            rep.append("(vacío)\n");
+        } else {
+            rep.append("[Últimas ").append(HISTORIAL.size()).append(" partidas]\n");
+            for (String h : HISTORIAL) {
+                rep.append(h).append("\n");
+            }
+        }
 
         rep.append("=======================================\n");
         System.out.println(rep.toString());
