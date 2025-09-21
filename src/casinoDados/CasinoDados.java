@@ -57,6 +57,8 @@ public class CasinoDados {
                 String apodo;
                 boolean apodoValido = false;
                 Jugador jugador = null;
+                
+                //bucle while para validar el apodo.
                 while (!apodoValido) {
                     System.out.print("Ingrese su Apodo (entre 3-10 caracteres, solo letras y espacios): ");
                     apodo = scanner.nextLine();
@@ -65,6 +67,8 @@ public class CasinoDados {
                         System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
                         int tipo = scanner.nextInt();
                         scanner.nextLine();
+                        
+                        // Se asigna el objeto jugador cuando el apodo es válido.
                         jugador = casino.crearJugador(nombre, tipo);
                         jugador.setApodo(apodo);
                         casino.agregarJugador(jugador);
@@ -124,7 +128,7 @@ public class CasinoDados {
         scanner.close();
     }
 
-    //----Validacion de Apodo
+    //----Validacion de Apodo Metodo para validar si un apodo cumple con los requisitos.
     public static boolean validarApodo(String apodo) {
         if (apodo == null || apodo.isEmpty()) {
             return false;
