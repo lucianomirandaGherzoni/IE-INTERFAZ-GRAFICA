@@ -8,10 +8,10 @@ import java.util.*;
 
 public class CasinoDados {
 
-    // 🔹 Historial de las últimas 5 partidas
+    //  Historial de las últimas 5 partidas
     private static final Deque<String> HISTORIAL = new ArrayDeque<>(5);
 
-// Contador para numerar partidas
+// Contador para numerar partidas 
     private static int contadorPartidas = 0;
 
     // Guarda una línea en el historial con tope 5
@@ -56,19 +56,24 @@ public class CasinoDados {
                 //------- Agregar Apodo ---------
                 String apodo;
                 boolean apodoValido = false;
+                Jugador jugador = null;
                 while (!apodoValido) {
                     System.out.print("Ingrese su Apodo (entre 3-10 caracteres, solo letras y espacios): ");
                     apodo = scanner.nextLine();
 
+                    if (validarApodo(apodo)) {
+                        System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
+                        int tipo = scanner.nextInt();
+                        scanner.nextLine();
+                        jugador = casino.crearJugador(nombre, tipo);
+                        jugador.setApodo(apodo);
+                        casino.agregarJugador(jugador);
+                        apodoValido = true;
+                    } else {
+                        System.out.println("¡Error! El apodo no es válido. Inténtalo de nuevo.");
+                    }
                 }
-
-                System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
-                int tipo = scanner.nextInt();
-                scanner.nextLine();
-
-                Jugador jugador = casino.crearJugador(nombre, tipo);
-                casino.agregarJugador(jugador);
-
+                                  
                 nombres.add(nombre);
                 jugadoresLocal.add(jugador);
             }
