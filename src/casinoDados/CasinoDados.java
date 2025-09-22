@@ -64,7 +64,7 @@ public class CasinoDados {
         rep.append("Mejor puntaje de dados: (pendiente)\n");
         rep.append("Víctimas del casino: (pendiente)\n");
 
-// --- HISTORIAL RECIENTE ---
+        // --- HISTORIAL RECIENTE ---
         rep.append("--- HISTORIAL RECIENTE ---\n");
         if (HISTORIAL.isEmpty()) {
             rep.append("(vacío)\n");
@@ -165,7 +165,7 @@ public class CasinoDados {
             // ================================
             ultimoPlantel = new ArrayList<>(jugadoresLocal);
 
-            // 🔹 Preguntar si seguir
+            // Preguntar si seguir
             System.out.print("\n¿Quieren jugar otra partida? (s/n): ");
             String respuesta = scanner.nextLine().trim().toLowerCase();
             if (!respuesta.equals("s")) {
