@@ -9,7 +9,7 @@ class juegoDados {
     //private Dado dado = new Dado();
     private final Dado dado = new Dado();
     
-    public int lanzarDados(Jugador jugador, JugadorCasino casino, RegistroTrampas registro ) {
+    public int lanzarDados(Jugador jugador, JugadorCasino casino, RegistroTrampas registro, Estadisticas estadisticas ) {
         int dado1 = dado.tirar();
         int dado2 = dado.tirar();
         int suma = dado1 + dado2;
@@ -21,6 +21,7 @@ class juegoDados {
                 dado2 = Math.max(1, dado2 - 1);
                 suma = dado1 + dado2;
                 registro.registrarTrampa("Confusión", jugador.getNombre());
+                estadisticas.registrarVictimas(jugador.getApodo());
                 System.out.println("¡El casino confundió a " + jugador.getNombre() + "!");
             }
         }

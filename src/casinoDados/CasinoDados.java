@@ -8,9 +8,9 @@ import java.util.*;
 
 public class CasinoDados {
 
-    private static final Deque<String> HISTORIAL = new ArrayDeque<>(5);
-
+    private static final ArrayList<String> HISTORIAL = new ArrayList<>(5);
     private static int contadorPartidas = 0;
+    private static Estadisticas estadisticas = new Estadisticas();
 
     // Guarda una línea en el historial con tope 5
     private static void guardarPartida(String detalle) {
@@ -58,11 +58,14 @@ public class CasinoDados {
                     .append(j.getPartidasGanadas()).append(" victorias\n");
         }
 
-        // --- Estadísticas (pendientes) ---
+        // --- Estadísticas---
         rep.append("--- ESTADÍSTICAS GENERALES ---\n");
-        rep.append("Mayor apuesta realizada: (pendiente)\n");
-        rep.append("Mejor puntaje de dados: (pendiente)\n");
-        rep.append("Víctimas del casino: (pendiente)\n");
+        rep.append("Mayor apuesta realizada: $").append(estadisticas.getMayorApuesta())
+                .append(" (").append(estadisticas.getJugadorMayorApuesta()).append(")\n");
+        rep.append("Mejor puntaje de dados: ").append(estadisticas.getMejorPuntaje())
+                .append(" (").append(estadisticas.getJugadorMejorPuntaje()).append(")\n");
+        rep.append("Jugadores afectados por trampas del casino: ")
+                .append(estadisticas.getVictimasDelCasino()).append("\n");
 
         // --- HISTORIAL RECIENTE ---
         rep.append("--- HISTORIAL RECIENTE ---\n");
@@ -129,7 +132,7 @@ public class CasinoDados {
                 jugadoresLocal.add(jugador);
             }
 
-            casino.jugar();
+            casino.jugar(estadisticas);
 
             // ===== Guardar en historial =====
             contadorPartidas++;
