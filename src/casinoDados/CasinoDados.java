@@ -112,7 +112,7 @@ public class CasinoDados {
                     apodo = scanner.nextLine();
 
                     if (validarApodo(apodo)) {
-                        System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP): ");
+                        System.out.print("Tipo (1=Novato, 2=Experto, 3=VIP, 4=Casino): ");
                         int tipo = scanner.nextInt();
                         scanner.nextLine();
 
