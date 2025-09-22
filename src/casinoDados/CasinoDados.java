@@ -169,50 +169,53 @@ public class CasinoDados {
             ultimoPlantel = new ArrayList<>(jugadoresLocal);
 
             // --- Lógica de comandos ---
-            System.out.println("\n  (Escribe 's' para jugar otra partida o algun COMANDO :(STATS, HISTORY, RANKING, TRAMPAS, SAVE [TU NOMBRE], QUIT))");
-            String comando = scanner.nextLine().trim().toUpperCase();
-            switch (comando) {
-                case "S":
-                    seguir = true;
-                    break;
-                case "STATS":
-                    //Logica para mostrar estadisticas 
-                    System.out.println("\n--- ESTADÍSTICAS GENERALES ---");
-                    System.out.println("Mayor apuesta realizada: $" + estadisticas.getMayorApuesta() + " (" + estadisticas.getJugadorMayorApuesta() + ")");
-                    System.out.println("Mejor puntaje de dados: " + estadisticas.getMejorPuntaje() + " (" + estadisticas.getJugadorMejorPuntaje() + ")");
-                    System.out.println("Jugadores afectados por trampas del casino: " + estadisticas.getVictimasDelCasino());
-                    break;
-                case "HISTORY":
-                    //Mostrar Historial de partidas
-                     mostrarHistorial();
-                    break;
-                case "RANKING":
-                    //Mostrar rankinkg actual
-                    imprimirReporteFinal(ultimoPlantel, contadorPartidas);
-                   
-                    break;
-                case "TRAMPAS":
-                    //Mostrar registros trampas
-                    System.out.println("Trampas del juego.");
-                    break;
-                case "QUIT":
-                    seguir = false;
-                    System.out.println("¡Gracias por jugar!");
-                    break;
-                default:
-                    if (comando.startsWith("SAVE ")) {
-                        // Logica para guardar partida
+            while (seguir) {
 
-                    } else {
-                        System.out.println("Comando no reconocido. Saliendo del juego.");
+                System.out.println("\n  (Escribe 's' para jugar otra partida o algun COMANDO :(STATS, HISTORY, RANKING, TRAMPAS, SAVE [TU NOMBRE], QUIT))");
+                String comando = scanner.nextLine().trim().toUpperCase();
+
+                switch (comando) {
+                    case "S":
+                        seguir = true;
+                        break;
+                    case "STATS":
+                        //Logica para mostrar estadisticas 
+                        System.out.println("\n--- ESTADÍSTICAS GENERALES ---");
+                        System.out.println("Mayor apuesta realizada: $" + estadisticas.getMayorApuesta() + " (" + estadisticas.getJugadorMayorApuesta() + ")");
+                        System.out.println("Mejor puntaje de dados: " + estadisticas.getMejorPuntaje() + " (" + estadisticas.getJugadorMejorPuntaje() + ")");
+                        System.out.println("Jugadores afectados por trampas del casino: " + estadisticas.getVictimasDelCasino());
+                        break;
+                    case "HISTORY":
+                        //Mostrar Historial de partidas
+                        mostrarHistorial();
+                        break;
+                    case "RANKING":
+                        //Mostrar rankinkg actual
+                        imprimirReporteFinal(ultimoPlantel, contadorPartidas);
+
+                        break;
+                    case "TRAMPAS":
+                        //Mostrar registros trampas
+                        casino.getRegistroTrampas().mostrarTrampas();
+                        break;
+                    case "QUIT":
                         seguir = false;
-                    }
-                    break;
-            }
+                        System.out.println("¡Gracias por jugar!");
+                        break;
+                    default:
+                        if (comando.startsWith("SAVE ")) {
+                            // Logica para guardar partida
 
+                        } else {
+                            System.out.println("Comando no reconocido. Saliendo del juego.");
+                            seguir = false;
+                        }
+                        break;
+                }
+
+            }
         }
 
-            
         //  Reporte final
         imprimirReporteFinal(ultimoPlantel, contadorPartidas);
         scanner.close();
