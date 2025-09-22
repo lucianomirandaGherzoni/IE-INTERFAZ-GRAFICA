@@ -168,7 +168,7 @@ public class CasinoDados {
             // ================================
             ultimoPlantel = new ArrayList<>(jugadoresLocal);
 
-            // --- Acá se agrega la lógica de comandos ---
+            // --- Lógica de comandos ---
             System.out.println("\n  (Escribe 's' para jugar otra partida o algun COMANDO :(STATS, HISTORY, RANKING, TRAMPAS, SAVE [TU NOMBRE], QUIT))");
             String comando = scanner.nextLine().trim().toUpperCase();
             switch (comando) {
@@ -177,7 +177,10 @@ public class CasinoDados {
                     break;
                 case "STATS":
                     //Logica para mostrar estadisticas 
-                    System.out.println("Estadisticas del juego.");
+                    System.out.println("\n--- ESTADÍSTICAS GENERALES ---");
+                    System.out.println("Mayor apuesta realizada: $" + estadisticas.getMayorApuesta() + " (" + estadisticas.getJugadorMayorApuesta() + ")");
+                    System.out.println("Mejor puntaje de dados: " + estadisticas.getMejorPuntaje() + " (" + estadisticas.getJugadorMejorPuntaje() + ")");
+                    System.out.println("Jugadores afectados por trampas del casino: " + estadisticas.getVictimasDelCasino());
                     break;
                 case "HISTORY":
                     //Mostrar Historial de partidas
@@ -189,7 +192,7 @@ public class CasinoDados {
                     break;
                 case "TRAMPAS":
                     //Mostrar registros trampas
-                     System.out.println("Trampas del juego.");
+                    System.out.println("Trampas del juego.");
                     break;
                 case "QUIT":
                     seguir = false;
@@ -197,7 +200,7 @@ public class CasinoDados {
                     break;
                 default:
                     if (comando.startsWith("SAVE ")) {
-                        // Lógica para guardar partida
+                        // Logica para guardar partida
 
                     } else {
                         System.out.println("Comando no reconocido. Saliendo del juego.");
@@ -208,6 +211,8 @@ public class CasinoDados {
 
         }
 
+
+            
         //  Reporte final
         imprimirReporteFinal(ultimoPlantel, contadorPartidas);
         scanner.close();
