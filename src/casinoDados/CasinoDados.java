@@ -184,11 +184,12 @@ public class CasinoDados {
                     break;
                 case "HISTORY":
                     //Mostrar Historial de partidas
-                    System.out.println("Historial del juego.");
+                     mostrarHistorial();
                     break;
                 case "RANKING":
                     //Mostrar rankinkg actual
-                    System.out.println("Ranking del juego.");
+                    imprimirReporteFinal(ultimoPlantel, contadorPartidas);
+                   
                     break;
                 case "TRAMPAS":
                     //Mostrar registros trampas
@@ -210,7 +211,6 @@ public class CasinoDados {
             }
 
         }
-
 
             
         //  Reporte final
