@@ -168,15 +168,47 @@ public class CasinoDados {
             // ================================
             ultimoPlantel = new ArrayList<>(jugadoresLocal);
 
-            // Preguntar si seguir
-            System.out.print("\n¿Quieren jugar otra partida? (s/n): ");
-            String respuesta = scanner.nextLine().trim().toLowerCase();
-            if (!respuesta.equals("s")) {
-                seguir = false;
+            // --- Acá se agrega la lógica de comandos ---
+            System.out.println("\n  (Escribe 's' para jugar otra partida o algun COMANDO :(STATS, HISTORY, RANKING, TRAMPAS, SAVE [TU NOMBRE], QUIT))");
+            String comando = scanner.nextLine().trim().toUpperCase();
+            switch (comando) {
+                case "S":
+                    seguir = true;
+                    break;
+                case "STATS":
+                    //Logica para mostrar estadisticas 
+                    System.out.println("Estadisticas del juego.");
+                    break;
+                case "HISTORY":
+                    //Mostrar Historial de partidas
+                    System.out.println("Historial del juego.");
+                    break;
+                case "RANKING":
+                    //Mostrar rankinkg actual
+                    System.out.println("Ranking del juego.");
+                    break;
+                case "TRAMPAS":
+                    //Mostrar registros trampas
+                     System.out.println("Trampas del juego.");
+                    break;
+                case "QUIT":
+                    seguir = false;
+                    System.out.println("¡Gracias por jugar!");
+                    break;
+                default:
+                    if (comando.startsWith("SAVE ")) {
+                        // Lógica para guardar partida
+
+                    } else {
+                        System.out.println("Comando no reconocido. Saliendo del juego.");
+                        seguir = false;
+                    }
+                    break;
             }
+
         }
 
-        // Al final del juego, mostrar el reporte final
+        //  Reporte final
         imprimirReporteFinal(ultimoPlantel, contadorPartidas);
         scanner.close();
     }
