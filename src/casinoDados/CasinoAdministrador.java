@@ -25,7 +25,7 @@ class CasinoAdministrador {
         jugadores.add(jugador);
     }
     
-    public void jugar (){
+    public void jugar (Estadisticas estadisticas){
         // Buscar si hay JugadorCasino
         JugadorCasino casino = null;
         for (Jugador j : jugadores) {
@@ -60,6 +60,7 @@ class CasinoAdministrador {
                 int apuesta = j.calcularApuesta();
                 j.perder(apuesta);
                 pozo += apuesta;
+                estadisticas.registrarApuesta(j.getApodo(), apuesta);
                 System.out.println(j.getNombre() + " apuesta $" + apuesta);
             }
             System.out.println("Pozo: $" + pozo);
@@ -69,7 +70,9 @@ class CasinoAdministrador {
             ArrayList<Jugador> ganadores = new ArrayList<>();
             
             for (Jugador j : jugadoresActivos) {
-                int puntaje = juego.lanzarDados(j, casino, registroTrampas);
+                int puntaje = juego.lanzarDados(j, casino, registroTrampas, estadisticas);
+                estadisticas.registrarPuntaje(j.getApodo(), puntaje);
+                
                 if (puntaje > mejorPuntaje) {
                     mejorPuntaje = puntaje;
                     ganadores.clear();
