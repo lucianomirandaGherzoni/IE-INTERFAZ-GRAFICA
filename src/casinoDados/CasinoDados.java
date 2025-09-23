@@ -67,7 +67,7 @@ public class CasinoDados {
         rep.append("Jugadores afectados por trampas del casino: ")
                 .append(estadisticas.getVictimasDelCasino()).append("\n");
 
-// --- HISTORIAL RECIENTE ---
+        // --- HISTORIAL RECIENTE ---
         rep.append("--- HISTORIAL RECIENTE ---\n");
         if (HISTORIAL.isEmpty()) {
             rep.append("(vacío)\n");
@@ -168,15 +168,57 @@ public class CasinoDados {
             // ================================
             ultimoPlantel = new ArrayList<>(jugadoresLocal);
 
-            // 🔹 Preguntar si seguir
-            System.out.print("\n¿Quieren jugar otra partida? (s/n): ");
-            String respuesta = scanner.nextLine().trim().toLowerCase();
-            if (!respuesta.equals("s")) {
-                seguir = false;
+            // --- Lógica de comandos ---
+            while (seguir) {
+
+                System.out.println("\n  (Escribe 's' para jugar otra partida o algun COMANDO :(STATS, HISTORY, RANKING, TRAMPAS, SAVE [TU NOMBRE], QUIT))");
+                String comando = scanner.nextLine().trim().toUpperCase();
+
+                switch (comando) {
+                    case "S":
+                        seguir = true;
+                        break;
+                    case "STATS":
+                        //Logica para mostrar estadisticas 
+                        System.out.println("\n--- ESTADÍSTICAS GENERALES ---");
+                        System.out.println("Mayor apuesta realizada: $" + estadisticas.getMayorApuesta() + " (" + estadisticas.getJugadorMayorApuesta() + ")");
+                        System.out.println("Mejor puntaje de dados: " + estadisticas.getMejorPuntaje() + " (" + estadisticas.getJugadorMejorPuntaje() + ")");
+                        System.out.println("Jugadores afectados por trampas del casino: " + estadisticas.getVictimasDelCasino());
+                        break;
+                    case "HISTORY":
+                        //Mostrar Historial de partidas
+                        mostrarHistorial();
+                        break;
+                    case "RANKING":
+                        //Mostrar rankinkg actual
+                        imprimirReporteFinal(ultimoPlantel, contadorPartidas);
+
+                        break;
+                    case "TRAMPAS":
+                        //Mostrar registros trampas
+                        casino.getRegistroTrampas().mostrarTrampas();
+                        break;
+                    case "QUIT":
+                        seguir = false;
+                        System.out.println("¡Gracias por jugar!");
+                        break;
+                    default:
+                        if (comando.startsWith("SAVE ")) {
+                            // Logica para guardar partida
+                            String nombreArchivo = comando.substring(5).trim();
+                            System.out.println("Guardando partida como: " + nombreArchivo);
+
+                        } else {
+                            System.out.println("Comando no reconocido. Saliendo del juego.");
+                            seguir = false;
+                        }
+                        break;
+                }
+
             }
         }
 
-        // Al final del juego, mostrar el reporte final
+        //  Reporte final
         imprimirReporteFinal(ultimoPlantel, contadorPartidas);
         scanner.close();
     }
