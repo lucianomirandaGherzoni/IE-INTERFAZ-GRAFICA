@@ -11,8 +11,8 @@ Proyecto colaborativo de un casino de dados escrito e implementado en Java usand
 ### Pasos para ejecutar
 
 1. **Clonar el repositorio:**
-```bash
-   git https://github.com/lucianomirandaGherzoni/IE-INTERFAZ-GRAFICA.git
+   Dentro del bash:
+   git clone https://github.com/lucianomirandaGherzoni/IE-INTERFAZ-GRAFICA.git
    cd casino-dados
 
 2. **Abrir en NetBeans:**
@@ -70,8 +70,6 @@ Proyecto colaborativo de un casino de dados escrito e implementado en Java usand
 - Implementación del sistema de comandos BONUS.
 - Comandos: `STATS`, `HISTORY`, `RANKING`, `TRAMPAS`, `SAVE`, `QUIT`.
 - Mejoras en la experiencia de usuario.
-
-# Proyecto Casino
 
 ## Recursos Adicionales
 
