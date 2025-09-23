@@ -205,6 +205,8 @@ public class CasinoDados {
                     default:
                         if (comando.startsWith("SAVE ")) {
                             // Logica para guardar partida
+                            String nombreArchivo = comando.substring(5).trim();
+                            System.out.println("Guardando partida como: " + nombreArchivo);
 
                         } else {
                             System.out.println("Comando no reconocido. Saliendo del juego.");
