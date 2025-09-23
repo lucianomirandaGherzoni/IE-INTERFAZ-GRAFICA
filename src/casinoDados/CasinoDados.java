@@ -8,7 +8,7 @@ import java.util.*;
 
 public class CasinoDados {
 
-    private static final ArrayList<String> HISTORIAL = new ArrayList<>(5);
+    private static final Deque<String> HISTORIAL = new ArrayDeque<>(5);
     private static int contadorPartidas = 0;
     private static Estadisticas estadisticas = new Estadisticas();
 
