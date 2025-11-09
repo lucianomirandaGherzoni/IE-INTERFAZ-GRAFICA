@@ -33,6 +33,10 @@ public class VentanaJuego extends javax.swing.JFrame {
         lblPartidaTexto = new javax.swing.JLabel();
         lblRondaTexto = new javax.swing.JLabel();
         lblRonda = new javax.swing.JLabel();
+        panelJugadores = new javax.swing.JPanel();
+        panelLog = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtLog = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuGuardarPartida = new javax.swing.JMenuItem();
@@ -72,7 +76,36 @@ public class VentanaJuego extends javax.swing.JFrame {
         lblRonda.setText("1/3");
         panelSuperior.add(lblRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 50, -1));
 
-        getContentPane().add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 23, 420, 70));
+        getContentPane().add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 440, 70));
+
+        panelJugadores.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado de jugadores"));
+        panelJugadores.setLayout(new java.awt.GridLayout(1, 4));
+        getContentPane().add(panelJugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 440, 210));
+
+        panelLog.setBorder(javax.swing.BorderFactory.createTitledBorder("Log de Eventos"));
+
+        txtLog.setEditable(false);
+        txtLog.setColumns(40);
+        txtLog.setRows(8);
+
+        javax.swing.GroupLayout panelLogLayout = new javax.swing.GroupLayout(panelLog);
+        panelLog.setLayout(panelLogLayout);
+        panelLogLayout.setHorizontalGroup(
+            panelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelLogLayout.setVerticalGroup(
+            panelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panelLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 440, 180));
 
         jMenu1.setText("Partida");
 
@@ -141,6 +174,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPartida;
     private javax.swing.JLabel lblPartidaTexto;
     private javax.swing.JLabel lblPozo;
@@ -152,6 +186,9 @@ public class VentanaJuego extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuHistorial;
     private javax.swing.JMenuItem menuRanking;
     private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JPanel panelJugadores;
+    private javax.swing.JPanel panelLog;
     private javax.swing.JPanel panelSuperior;
+    private javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
 }
