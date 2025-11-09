@@ -16,7 +16,30 @@ public class VentanaJuego extends javax.swing.JFrame {
     public VentanaJuego() {
         initComponents();
     }
+    
+    public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int rondaActual, double pozo) {
+        lblPartida.setText(partidaActual + "/" + totalPartidas);
+        lblRonda.setText(rondaActual + "/3"); 
+        lblPozo.setText("$" + String.format("%.2f", pozo));
+    }
 
+    public void agregarLog(String mensaje) {
+        txtLog.append(mensaje + "\n");
+        // Auto-scroll
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+    }
+    
+    public javax.swing.JPanel getPanelJugadores() {
+        return panelJugadores;
+    }
+    
+    public void resetearVista() {
+        txtLog.setText("");
+        panelJugadores.removeAll();
+        panelJugadores.revalidate();
+        panelJugadores.repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
