@@ -4,7 +4,7 @@
  */
 package casino.modelo;
 
-class JugadorNovato extends Jugador{
+public class JugadorNovato extends Jugador{
 
     public JugadorNovato(String nombre) {
         super(nombre);

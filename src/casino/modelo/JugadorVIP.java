@@ -5,7 +5,7 @@
 package casino.modelo;
 
 
-class JugadorVIP extends Jugador{
+public class JugadorVIP extends Jugador{
 
     private boolean reRoll;
     

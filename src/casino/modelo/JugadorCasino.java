@@ -7,7 +7,7 @@ package casino.modelo;
 import java.util.Random;
 
 
-class JugadorCasino extends Jugador{
+public class JugadorCasino extends Jugador{
 
     private double PROBABILIDAD_DADOS_CARGADOS = 0.3;
     private double PROBABILIDAD_CONFUNDIR = 0.3;    

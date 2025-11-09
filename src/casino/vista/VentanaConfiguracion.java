@@ -4,6 +4,9 @@
  */
 package casino.vista;
 
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BANGHO
@@ -35,20 +38,20 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         optPartidas5 = new javax.swing.JRadioButton();
         optPartidas2 = new javax.swing.JRadioButton();
         panelRegistroJugadores1 = new javax.swing.JPanel();
-        lblTipo1 = new javax.swing.JLabel();
-        txtApodo1 = new javax.swing.JTextField();
+        lblTipo = new javax.swing.JLabel();
+        txtApodo = new javax.swing.JTextField();
         lblNombre2 = new javax.swing.JLabel();
-        txtNombre2 = new javax.swing.JTextField();
-        lblJugadores1 = new javax.swing.JLabel();
-        cmbTipoJugador1 = new javax.swing.JComboBox<>();
-        btnEliminarJugador1 = new javax.swing.JButton();
+        txtNombre = new javax.swing.JTextField();
+        lblJugadores = new javax.swing.JLabel();
+        cmbTipoJugador = new javax.swing.JComboBox<>();
+        btnEliminarJugador = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        lstJugadores1 = new javax.swing.JList<>();
-        lblApodo2 = new javax.swing.JLabel();
-        btnAgregarJugador3 = new javax.swing.JButton();
+        lstJugadores = new javax.swing.JList<>();
+        lblApodo = new javax.swing.JLabel();
+        btnAgregarJugador = new javax.swing.JButton();
         btnCargarPartida = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        btnIniciarJuego1 = new javax.swing.JButton();
+        btnIniciarJuego = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Casino de Dados - Configuración");
@@ -89,52 +92,52 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         panelRegistroJugadores1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         panelRegistroJugadores1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTipo1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTipo1.setText("Tipo:");
-        panelRegistroJugadores1.add(lblTipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
-        panelRegistroJugadores1.add(txtApodo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 190, -1));
+        lblTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTipo.setText("Tipo:");
+        panelRegistroJugadores1.add(lblTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        panelRegistroJugadores1.add(txtApodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 190, -1));
 
         lblNombre2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNombre2.setText("Nombre");
         panelRegistroJugadores1.add(lblNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-        panelRegistroJugadores1.add(txtNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 190, -1));
+        panelRegistroJugadores1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 190, -1));
 
-        lblJugadores1.setText("Jugadores");
-        panelRegistroJugadores1.add(lblJugadores1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+        lblJugadores.setText("Jugadores");
+        panelRegistroJugadores1.add(lblJugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
-        cmbTipoJugador1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbTipoJugador1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novato", "Experto", "VIP", "Casino" }));
-        cmbTipoJugador1.addActionListener(new java.awt.event.ActionListener() {
+        cmbTipoJugador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbTipoJugador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novato", "Experto", "VIP", "Casino" }));
+        cmbTipoJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbTipoJugador1ActionPerformed(evt);
+                cmbTipoJugadorActionPerformed(evt);
             }
         });
-        panelRegistroJugadores1.add(cmbTipoJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 190, -1));
+        panelRegistroJugadores1.add(cmbTipoJugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 190, -1));
 
-        btnEliminarJugador1.setText("Eliminar Jugador");
-        btnEliminarJugador1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarJugador.setText("Eliminar Jugador");
+        btnEliminarJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarJugador1ActionPerformed(evt);
+                btnEliminarJugadorActionPerformed(evt);
             }
         });
-        panelRegistroJugadores1.add(btnEliminarJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
+        panelRegistroJugadores1.add(btnEliminarJugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
 
-        lstJugadores1.setToolTipText("");
-        jScrollPane3.setViewportView(lstJugadores1);
+        lstJugadores.setToolTipText("");
+        jScrollPane3.setViewportView(lstJugadores);
 
         panelRegistroJugadores1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 250, 80));
 
-        lblApodo2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblApodo2.setText("Apodo");
-        panelRegistroJugadores1.add(lblApodo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        lblApodo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblApodo.setText("Apodo");
+        panelRegistroJugadores1.add(lblApodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        btnAgregarJugador3.setText("Agregar Jugador");
-        btnAgregarJugador3.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarJugador.setText("Agregar Jugador");
+        btnAgregarJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarJugador3ActionPerformed(evt);
+                btnAgregarJugadorActionPerformed(evt);
             }
         });
-        panelRegistroJugadores1.add(btnAgregarJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        panelRegistroJugadores1.add(btnAgregarJugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         getContentPane().add(panelRegistroJugadores1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 330, 270));
 
@@ -154,40 +157,40 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, 110, 30));
 
-        btnIniciarJuego1.setText("Inciar Juego");
-        btnIniciarJuego1.addActionListener(new java.awt.event.ActionListener() {
+        btnIniciarJuego.setText("Inciar Juego");
+        btnIniciarJuego.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarJuego1ActionPerformed(evt);
+                btnIniciarJuegoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIniciarJuego1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 110, 30));
+        getContentPane().add(btnIniciarJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 110, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbTipoJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoJugador1ActionPerformed
+    private void cmbTipoJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoJugadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTipoJugador1ActionPerformed
+    }//GEN-LAST:event_cmbTipoJugadorActionPerformed
 
-    private void btnEliminarJugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarJugador1ActionPerformed
+    private void btnEliminarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarJugadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarJugador1ActionPerformed
+    }//GEN-LAST:event_btnEliminarJugadorActionPerformed
 
     private void btnCargarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarPartidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCargarPartidaActionPerformed
 
-    private void btnAgregarJugador3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugador3ActionPerformed
+    private void btnAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarJugador3ActionPerformed
+    }//GEN-LAST:event_btnAgregarJugadorActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnIniciarJuego1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarJuego1ActionPerformed
+    private void btnIniciarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarJuegoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarJuego1ActionPerformed
+    }//GEN-LAST:event_btnIniciarJuegoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,27 +229,47 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgPartidas;
-    private javax.swing.JButton btnAgregarJugador3;
+    private javax.swing.JButton btnAgregarJugador;
     private javax.swing.JButton btnCargarPartida;
-    private javax.swing.JButton btnEliminarJugador1;
-    private javax.swing.JButton btnIniciarJuego1;
+    private javax.swing.JButton btnEliminarJugador;
+    private javax.swing.JButton btnIniciarJuego;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cmbTipoJugador1;
+    private javax.swing.JComboBox<String> cmbTipoJugador;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblApodo2;
+    private javax.swing.JLabel lblApodo;
     private javax.swing.JLabel lblDineroInicial;
-    private javax.swing.JLabel lblJugadores1;
+    private javax.swing.JLabel lblJugadores;
     private javax.swing.JLabel lblNombre2;
-    private javax.swing.JLabel lblTipo1;
+    private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel llbCantidaPartidas;
-    private javax.swing.JList<String> lstJugadores1;
+    private javax.swing.JList<String> lstJugadores;
     private javax.swing.JRadioButton optPartidas2;
     private javax.swing.JRadioButton optPartidas3;
     private javax.swing.JRadioButton optPartidas5;
     private javax.swing.JPanel panelConfiguracion;
     private javax.swing.JPanel panelRegistroJugadores1;
-    private javax.swing.JTextField txtApodo1;
+    private javax.swing.JTextField txtApodo;
     private javax.swing.JTextField txtDineroInicial;
-    private javax.swing.JTextField txtNombre2;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    // Métodos públicos para el controlador
+    public JList<String> getLstJugadores() {
+        return lstJugadores;
+    }
+    
+    public void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void limpiarCampos() {
+        txtNombre.setText("");
+        txtApodo.setText("");
+        cmbTipoJugador.setSelectedIndex(0);
+    }
+
 }
