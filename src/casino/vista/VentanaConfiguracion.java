@@ -4,8 +4,10 @@
  */
 package casino.vista;
 
+import casino.controlador.ControladorConfiguracion;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -18,6 +20,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
      */
     public VentanaConfiguracion() {
         initComponents();
+        this.controlador = new ControladorConfiguracion(this);
     }
 
     /**
@@ -157,7 +160,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, 110, 30));
 
-        btnIniciarJuego.setText("Inciar Juego");
+        btnIniciarJuego.setText("Iniciar Juego");
         btnIniciarJuego.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarJuegoActionPerformed(evt);
@@ -173,23 +176,42 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbTipoJugadorActionPerformed
 
     private void btnEliminarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarJugadorActionPerformed
-        // TODO add your handling code here:
+        int indice = lstJugadores.getSelectedIndex();
+        controlador.eliminarJugador(indice);
     }//GEN-LAST:event_btnEliminarJugadorActionPerformed
 
     private void btnCargarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarPartidaActionPerformed
-        // TODO add your handling code here:
+        mostrarMensaje("Funcionalidad en desarrollo");
+        //Todavía no está porque implementa carga de partidas guardad y requiere implementar GestorPersistencia
     }//GEN-LAST:event_btnCargarPartidaActionPerformed
 
     private void btnAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugadorActionPerformed
-        // TODO add your handling code here:
+        String nombre = txtNombre.getText().trim();
+        String apodo = txtApodo.getText().trim();
+        String tipo = (String) cmbTipoJugador.getSelectedItem();
+        
+        controlador.agregarJugador(nombre, apodo, tipo);
     }//GEN-LAST:event_btnAgregarJugadorActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        controlador.salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnIniciarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarJuegoActionPerformed
-        // TODO add your handling code here:
+        try {
+            int dineroInicial = Integer.parseInt(txtDineroInicial.getText());
+            int cantidadPartidas = 3; // Por defecto
+
+            if (optPartidas2.isSelected()) {
+                cantidadPartidas = 2;
+            } else if (optPartidas5.isSelected()) {
+                cantidadPartidas = 5;
+            }
+
+            controlador.iniciarJuego(dineroInicial, cantidadPartidas);
+        } catch (NumberFormatException e) {
+            mostrarError("El dinero inicial debe ser un número válido");
+        }
     }//GEN-LAST:event_btnIniciarJuegoActionPerformed
 
     /**
@@ -226,7 +248,8 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
             }
         });
     }
-
+    // Controlador
+    private ControladorConfiguracion controlador;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgPartidas;
     private javax.swing.JButton btnAgregarJugador;
