@@ -20,11 +20,11 @@ public class PartidaModelo {
     
     //constructor
     public PartidaModelo() {
-        this.historial = historial;
-        this.contadorPartidas = contadorPartidas;
-        this.estadisticas = estadisticas;
-        this.jugadores = jugadores;
-        this.casino = casino;
+        this.historial = new ArrayList<>();
+        this.contadorPartidas = 0;
+        this.estadisticas = new Estadisticas();
+        this.jugadores = new ArrayList<>();
+        this.casino = new CasinoAdministrador();
     }
     
     //Métodos para manejar el historial
