@@ -6,7 +6,8 @@ package casino.controlador;
 
 import casino.modelo.*;
 import casino.vista.VentanaJuego;
-import casino.vista.PanelJugador;
+import casino.vista.componentes.PanelJugador;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
@@ -21,9 +22,15 @@ public class ControladorVentanaJuego {
 
     public ControladorVentanaJuego(VentanaJuego vista, List<Jugador> jugadores, int cantidadPartidas) {
         this.vista = vista;
-        this.jugadores = jugadores;
+       // this.jugadores = jugadores;
         this.cantidadPartidas = cantidadPartidas;
         this.modelo = new PartidaModelo();
+        this.panelesJugadores = new ArrayList<>();
+        
+        for (Jugador j : jugadores) {
+            this.modelo.agregarJugador(j);
+        }
+        
     }
     
     //Implementar lógica del juego
