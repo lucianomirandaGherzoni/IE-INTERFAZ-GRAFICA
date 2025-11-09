@@ -2,11 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package casinoDados;
+package casino.modelo;
 
+import casino.modelo.Jugador;
+import casino.modelo.JugadorNovato;
+import casino.modelo.RegistroTrampas;
+import casino.modelo.juegoDados;
+import casino.modelo.Estadisticas;
+import casino.modelo.JugadorVIP;
+import casino.modelo.JugadorExperto;
+import casino.modelo.JugadorCasino;
 import java.util.ArrayList;
 
-class CasinoAdministrador {
+public class CasinoAdministrador {
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private juegoDados juego;
     private RegistroTrampas registroTrampas = new RegistroTrampas();

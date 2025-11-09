@@ -4,6 +4,9 @@
  */
 package casinoDados;
 
+import casino.modelo.CasinoAdministrador;
+import casino.modelo.Jugador;
+import casino.modelo.Estadisticas;
 import java.util.*;
 
 public class CasinoDados {

@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package casinoDados;
+package casino.modelo;
 
 import java.util.ArrayList;
 
-class Estadisticas {
+public class Estadisticas {
     private int mejorPuntaje = 0;
     private String jugadorMejorPuntaje = "";
     private int mayorApuesta = 0;
