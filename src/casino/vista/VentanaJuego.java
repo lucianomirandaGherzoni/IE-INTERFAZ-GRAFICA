@@ -26,18 +26,78 @@ public class VentanaJuego extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        panelSuperior = new javax.swing.JPanel();
+        lblPozo = new javax.swing.JLabel();
+        lblPozoTexto = new javax.swing.JLabel();
+        lblPartida = new javax.swing.JLabel();
+        lblPartidaTexto = new javax.swing.JLabel();
+        lblRondaTexto = new javax.swing.JLabel();
+        lblRonda = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuGuardarPartida = new javax.swing.JMenuItem();
+        menuSalir = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuRanking = new javax.swing.JMenuItem();
+        menuHistorial = new javax.swing.JMenuItem();
+        menuEstadisticas = new javax.swing.JMenuItem();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelSuperior.setBorder(javax.swing.BorderFactory.createTitledBorder("Información de la partida"));
+        panelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPozo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPozo.setText("$0");
+        panelSuperior.add(lblPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 50, -1));
+
+        lblPozoTexto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPozoTexto.setText("Pozo:");
+        panelSuperior.add(lblPozoTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 50, -1));
+
+        lblPartida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPartida.setText("1/5");
+        panelSuperior.add(lblPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 50, -1));
+
+        lblPartidaTexto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPartidaTexto.setText("Partida:");
+        panelSuperior.add(lblPartidaTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 50, -1));
+
+        lblRondaTexto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblRondaTexto.setText("Ronda:");
+        panelSuperior.add(lblRondaTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 50, -1));
+
+        lblRonda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblRonda.setText("1/3");
+        panelSuperior.add(lblRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 50, -1));
+
+        getContentPane().add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 23, 420, 70));
+
+        jMenu1.setText("Partida");
+
+        menuGuardarPartida.setText("Guardar Partida");
+        jMenu1.add(menuGuardarPartida);
+
+        menuSalir.setText("Salir");
+        jMenu1.add(menuSalir);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Ver");
+
+        menuRanking.setText("Ranking Actual");
+        jMenu2.add(menuRanking);
+
+        menuHistorial.setText("Historial de Partidas");
+        jMenu2.add(menuHistorial);
+
+        menuEstadisticas.setText("Estadísticas Generales");
+        jMenu2.add(menuEstadisticas);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,5 +138,20 @@ public class VentanaJuego extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel lblPartida;
+    private javax.swing.JLabel lblPartidaTexto;
+    private javax.swing.JLabel lblPozo;
+    private javax.swing.JLabel lblPozoTexto;
+    private javax.swing.JLabel lblRonda;
+    private javax.swing.JLabel lblRondaTexto;
+    private javax.swing.JMenuItem menuEstadisticas;
+    private javax.swing.JMenuItem menuGuardarPartida;
+    private javax.swing.JMenuItem menuHistorial;
+    private javax.swing.JMenuItem menuRanking;
+    private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JPanel panelSuperior;
     // End of variables declaration//GEN-END:variables
 }
