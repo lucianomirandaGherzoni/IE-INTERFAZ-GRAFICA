@@ -4,12 +4,15 @@
  */
 package casino;
 
+import casino.controlador.ControladorJuego;
 /**
  *
  * @author BANGHO
  */
 public class Main {
     public static void main(String[] args) {
-        //Completar, traer todo desde CasinoDados.java
+        ControladorJuego controlador = new ControladorJuego();
+        controlador.iniciar();
+        
     }
 }
