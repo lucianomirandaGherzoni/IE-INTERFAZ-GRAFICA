@@ -6,6 +6,7 @@ package casino.controlador;
 
 import casino.modelo.*;
 import casino.vista.VentanaJuego;
+import casino.vista.PanelJugador;
 import java.util.List;
 /**
  *
@@ -14,8 +15,9 @@ import java.util.List;
 public class ControladorVentanaJuego {
     private VentanaJuego vista;
     private PartidaModelo modelo;
-    private List<Jugador> jugadores;
     private int cantidadPartidas;
+     //private List<Jugador> jugadores;
+    private List<PanelJugador> panelesJugadores; //Lista para guardar los paneles de jugador y poder actualizarlos
 
     public ControladorVentanaJuego(VentanaJuego vista, List<Jugador> jugadores, int cantidadPartidas) {
         this.vista = vista;
