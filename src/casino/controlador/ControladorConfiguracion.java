@@ -111,8 +111,8 @@ public class ControladorConfiguracion {
         }
         
         // Crear y abrir ventana de juego
-        //VentanaJuego ventanaJuego = new VentanaJuego(jugadores, cantidadPartidas);
-        //ventanaJuego.setVisible(true);
+        VentanaJuego ventanaJuego = new VentanaJuego();
+        ventanaJuego.setVisible(true);
         
         // Cerrar ventana de configuración
         vista.dispose();

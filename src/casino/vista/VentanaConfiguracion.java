@@ -246,7 +246,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
             public void run() {
                 new VentanaConfiguracion().setVisible(true);
             }
-        });
+        }); 
     }
     // Controlador
     private ControladorConfiguracion controlador;
