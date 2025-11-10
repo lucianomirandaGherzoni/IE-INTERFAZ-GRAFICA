@@ -10,10 +10,6 @@ import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import casino.modelo.dto.EstadisticasDTO;
-import casino.modelo.dto.JugadorDTO;
-import casino.modelo.dto.PartidaResumenDTO;
-
 /**
  *
  * @author BANGHO
@@ -77,7 +73,7 @@ public class VentanaReporte extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Estadisticas"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Estadísticas"));
         jPanel2.setPreferredSize(new java.awt.Dimension(200, 277));
         jPanel2.setLayout(new java.awt.GridLayout(3, 1, 6, 6));
 
@@ -114,46 +110,61 @@ public class VentanaReporte extends javax.swing.JFrame {
 // --- Métodos Públicos ---
 
 // Carga los jugadores en la tabla de ranking y los ordena por dinero (desc)
-public void cargarRanking(List<JugadorDTO> jugadores) {
-    DefaultTableModel modelo = (DefaultTableModel) tablaRanking.getModel();
-    // En caso de que la tabla no tenga cabeceras
-    if (modelo.getColumnCount() == 0) {
-        modelo.setColumnIdentifiers(new String[]{"Nombre", "Tipo", "Dinero Final", "Victorias"});
-    }
+public void cargarRanking(java.util.List<casino.modelo.Jugador> jugadores) {
+    javax.swing.table.DefaultTableModel modelo =
+            (javax.swing.table.DefaultTableModel) tablaRanking.getModel();
+
+    // Encabezados correctos SIEMPRE
+    modelo.setColumnIdentifiers(new String[]{"Nombre", "Tipo", "Dinero Final", "Victorias"});
     modelo.setRowCount(0);
-    for (var j : jugadores) {
-        modelo.addRow(new Object[]{ j.nombre, j.tipo, j.dineroFinal, j.victorias });
+
+    // Ordenar por dinero DESC con tus getters reales
+    java.util.List<casino.modelo.Jugador> ordenados = new java.util.ArrayList<>(jugadores);
+    ordenados.sort((a, b) -> Integer.compare(b.getDinero(), a.getDinero()));
+
+    for (casino.modelo.Jugador j : ordenados) {
+        String tipo = j.getClass().getSimpleName();         // Novato / Experto / VIP / Casino
+        int victorias = j.getPartidasGanadas();              // ← en tu modelo este es el nombre
+        modelo.addRow(new Object[]{ j.getNombre(), tipo, j.getDinero(), victorias });
     }
-    // Orden descendente por "Dinero Final" (columna 2)
-    TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) tablaRanking.getRowSorter();
-    if (sorter == null) {
-        sorter = new TableRowSorter<>(tablaRanking.getModel());
-        tablaRanking.setRowSorter(sorter);
-    }
-    sorter.setSortKeys(List.of(new RowSorter.SortKey(2, SortOrder.DESCENDING)));
+
+    // Ordenador de tabla (por si el usuario clickea encabezados)
+    javax.swing.table.TableRowSorter<javax.swing.table.TableModel> sorter =
+            new javax.swing.table.TableRowSorter<>(tablaRanking.getModel());
+    tablaRanking.setRowSorter(sorter);
+    sorter.setSortKeys(java.util.List.of(
+            new javax.swing.RowSorter.SortKey(2, javax.swing.SortOrder.DESCENDING) // col Dinero
+    ));
     sorter.sort();
 }
 
 // Muestra las estadísticas generales
-public void mostrarEstadisticas(EstadisticasDTO e) {
+
+public void mostrarEstadisticas(casino.modelo.Estadisticas e) {
     if (e == null) {
         lblMayorApuesta.setText("Mayor apuesta: –");
         lblMejorTirada.setText("Mejor puntaje: –");
         lblVictimas.setText("Víctimas del casino: –");
         return;
     }
-    lblMayorApuesta.setText("Mayor apuesta: $" + e.mayorApuesta + " (" + e.jugadorMayorApuesta + ")");
-    lblMejorTirada.setText("Mejor puntaje: " + e.mejorTirada + " (" + e.jugadorMejorTirada + ")");
-    lblVictimas.setText("Víctimas del casino: " + e.victimasCasino);
-}
+    lblMayorApuesta.setText("Mayor apuesta: $" + e.getMayorApuesta()
+            + " (" + e.getJugadorMayorApuesta() + ")");
 
+    lblMejorTirada.setText("Mejor puntaje: " + e.getMejorPuntaje()
+            + " (" + e.getJugadorMejorPuntaje() + ")");
+
+    // Tu método devuelve un String con “nombres (Total: N)” o “Ninguna”
+    lblVictimas.setText("Víctimas del casino: " + e.getVictimasDelCasino());
+}
 // Carga las últimas partidas jugadas en el área de texto
-public void cargarHistorial(List<PartidaResumenDTO> partidas) {
+
+public void cargarHistorial(java.util.List<String> lineas) {
     txtHistorial.setText("");
-    if (partidas == null || partidas.isEmpty()) return;
-    int max = Math.min(5, partidas.size()); // muestra máximo 5 partidas
-    for (int i = Math.max(0, partidas.size() - max); i < partidas.size(); i++) {
-        txtHistorial.append(partidas.get(i).formatoLinea() + "\n");
+    if (lineas == null || lineas.isEmpty()) return;
+
+    int max = Math.min(5, lineas.size());
+    for (int i = Math.max(0, lineas.size() - max); i < lineas.size(); i++) {
+        txtHistorial.append(lineas.get(i) + "\n");
     }
     txtHistorial.setCaretPosition(0);
 }
