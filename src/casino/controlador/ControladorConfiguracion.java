@@ -8,6 +8,7 @@ package casino.controlador;
 import casino.modelo.*;
 import casino.vista.VentanaConfiguracion;
 import casino.vista.VentanaJuego;
+import casino.controlador.ControladorVentanaJuego;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,9 +111,16 @@ public class ControladorConfiguracion {
             j.setDinero(dineroInicial);
         }
         
-        // Crear y abrir ventana de juego
+        // Crea la Vista
         VentanaJuego ventanaJuego = new VentanaJuego();
-        ventanaJuego.setVisible(true);
+        
+        //Crear el Controlador y pasarle los datos
+        ControladorVentanaJuego controlJuego = new ControladorVentanaJuego(
+            ventanaJuego, 
+            this.jugadores,  // <-- Le pasamos los jugadores
+            cantidadPartidas // <-- Le pasamos las partidas
+        );
+        controlJuego.iniciar();
         
         // Cerrar ventana de configuración
         vista.dispose();
