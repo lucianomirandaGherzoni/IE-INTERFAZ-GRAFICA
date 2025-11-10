@@ -26,21 +26,94 @@ public class VentanaReporte extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnVolver = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaRanking = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        lblMayorApuesta = new javax.swing.JLabel();
+        lblMejorTirada = new javax.swing.JLabel();
+        lblVictimas = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtHistorial = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        btnVolver.setText("Volver al inicio");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(358, Short.MAX_VALUE)
+                .addComponent(btnVolver)
+                .addGap(120, 120, 120))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnVolver)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        tablaRanking.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablaRanking.setFillsViewportHeight(true);
+        jScrollPane1.setViewportView(tablaRanking);
+
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Estadisticas"));
+        jPanel2.setPreferredSize(new java.awt.Dimension(200, 277));
+        jPanel2.setLayout(new java.awt.GridLayout());
+
+        lblMayorApuesta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblMayorApuesta.setText("Mayor Apuesta: -");
+        jPanel2.add(lblMayorApuesta);
+
+        lblMejorTirada.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblMejorTirada.setText("Mejor Puntaje: -");
+        jPanel2.add(lblMejorTirada);
+
+        lblVictimas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblVictimas.setText("Victimas del casino: -");
+        jPanel2.add(lblVictimas);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Historial (ultimas partidas)"));
+
+        txtHistorial.setEditable(false);
+        txtHistorial.setColumns(40);
+        txtHistorial.setRows(6);
+        jScrollPane2.setViewportView(txtHistorial);
+
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +151,15 @@ public class VentanaReporte extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblMayorApuesta;
+    private javax.swing.JLabel lblMejorTirada;
+    private javax.swing.JLabel lblVictimas;
+    private javax.swing.JTable tablaRanking;
+    private javax.swing.JTextArea txtHistorial;
     // End of variables declaration//GEN-END:variables
 }
