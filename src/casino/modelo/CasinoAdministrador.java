@@ -87,7 +87,16 @@ public class CasinoAdministrador {
             ArrayList<Jugador> ganadores = new ArrayList<>();
             
             for (Jugador j : jugadoresActivos) {
-                int puntaje = juego.lanzarDados(j, casino, registroTrampas, estadisticas);
+   
+                ResultadoDados resultado = juego.lanzarDados(j, casino, registroTrampas, estadisticas);
+                
+                for(String msg : resultado.getMensajes()){
+                    System.out.println(msg);
+                }
+                
+     
+                int puntaje = resultado.getSuma(); 
+   
                 estadisticas.registrarPuntaje(j.getApodo(), puntaje);
                 
                 if (puntaje > mejorPuntaje) {
