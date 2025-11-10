@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package casinoDados;
+package casino.modelo;
 
-abstract class Jugador {
+public abstract class Jugador {
     public String nombre;
     public String apodo;
     public int dinero;
     public int partidasGanadas;
+    protected int apuestaActual;
+    protected int[] resultadoDados;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
@@ -30,6 +32,22 @@ abstract class Jugador {
 
     public void setPartidasGanadas(int partidasGanadas) {
         this.partidasGanadas = partidasGanadas;
+    }
+    
+    public int getApuestaActual() {
+        return apuestaActual;
+    }
+
+    public void setApuestaActual(int apuestaActual) {
+        this.apuestaActual = apuestaActual;
+    }
+
+    public int[] getResultadoDados() {
+        return resultadoDados;
+    }
+
+    public void setResultadoDados(int[] resultadoDados) {
+        this.resultadoDados = resultadoDados;
     }
 
     public String getNombre() {

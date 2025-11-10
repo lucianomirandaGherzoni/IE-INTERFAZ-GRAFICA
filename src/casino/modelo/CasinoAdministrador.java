@@ -2,19 +2,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package casinoDados;
+package casino.modelo;
 
+import casino.modelo.Jugador;
+import casino.modelo.JugadorNovato;
+import casino.modelo.RegistroTrampas;
+import casino.modelo.juegoDados;
+import casino.modelo.Estadisticas;
+import casino.modelo.JugadorVIP;
+import casino.modelo.JugadorExperto;
+import casino.modelo.JugadorCasino;
 import java.util.ArrayList;
 
-class CasinoAdministrador {
-    private final ArrayList<Jugador> jugadores = new ArrayList<>();
-    private final juegoDados juego = new juegoDados();
+public class CasinoAdministrador {
+    private ArrayList<Jugador> jugadores = new ArrayList<>();
+    private juegoDados juego;
+    private RegistroTrampas registroTrampas = new RegistroTrampas();
     
     public Jugador crearJugador(String nombre, int tipo) {
         return switch (tipo) {
             case 1 -> new JugadorNovato(nombre);
             case 2 -> new JugadorExperto(nombre);
             case 3 -> new JugadorVIP(nombre);
+            case 4 -> new JugadorCasino(nombre);
             default -> new JugadorNovato(nombre);
         };
     }
@@ -23,7 +33,19 @@ class CasinoAdministrador {
         jugadores.add(jugador);
     }
     
-    public void jugar (){
+    public void jugar (Estadisticas estadisticas){
+        // Buscar si hay JugadorCasino
+        JugadorCasino casino = null;
+        for (Jugador j : jugadores) {
+            if (j instanceof JugadorCasino) {
+                casino = (JugadorCasino) j;
+                break;
+            }
+        }
+        
+        // Crear JuegoDados con los datos necesarios
+        juego = new juegoDados();
+        
         for (int ronda = 1; ronda <= 3; ronda++) {
             System.out.println("\nRONDA " + ronda);
             
@@ -46,6 +68,7 @@ class CasinoAdministrador {
                 int apuesta = j.calcularApuesta();
                 j.perder(apuesta);
                 pozo += apuesta;
+                estadisticas.registrarApuesta(j.getApodo(), apuesta);
                 System.out.println(j.getNombre() + " apuesta $" + apuesta);
             }
             System.out.println("Pozo: $" + pozo);
@@ -55,7 +78,9 @@ class CasinoAdministrador {
             ArrayList<Jugador> ganadores = new ArrayList<>();
             
             for (Jugador j : jugadoresActivos) {
-                int puntaje = juego.lanzarDados(j);
+                int puntaje = juego.lanzarDados(j, casino, registroTrampas, estadisticas);
+                estadisticas.registrarPuntaje(j.getApodo(), puntaje);
+                
                 if (puntaje > mejorPuntaje) {
                     mejorPuntaje = puntaje;
                     ganadores.clear();
@@ -84,4 +109,8 @@ class CasinoAdministrador {
             System.out.println(j.getNombre() + " (" + j.obtenerTipoJugador() + "): $" + j.getDinero() + " - Ganadas: " + j.getPartidasGanadas());
         }
     }
+    
+    public RegistroTrampas getRegistroTrampas (){
+        return registroTrampas;
+    } 
 }

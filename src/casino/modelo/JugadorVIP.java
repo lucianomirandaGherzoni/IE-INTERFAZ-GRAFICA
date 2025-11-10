@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package casinoDados;
+package casino.modelo;
 
 
-class JugadorVIP extends Jugador{
+public class JugadorVIP extends Jugador{
 
     private boolean reRoll;
     

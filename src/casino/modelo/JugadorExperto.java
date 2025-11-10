@@ -2,21 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package casinoDados;
+package casino.modelo;
 
-class JugadorNovato extends Jugador{
+public class JugadorExperto extends Jugador{
 
-    public JugadorNovato(String nombre) {
+    public JugadorExperto(String nombre) {
         super(nombre);
     }
     
     @Override
     public int calcularApuesta() {
-        return Math.min(50, getDinero());
+        return (int) (getDinero() * 0.20); // Apuesta 20% de su dinero
     }
     
     @Override
     public String obtenerTipoJugador() {
-        return "Novato";
+        return "Experto";
     }
+    
 }
