@@ -53,6 +53,8 @@ public class juegoDados {
             }
         }
         
+        
+        jugador.setResultadoDados(new int[]{dado1, dado2});
         return suma;
     }
 }

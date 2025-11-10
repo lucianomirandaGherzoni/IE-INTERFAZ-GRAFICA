@@ -17,10 +17,10 @@ public class VentanaJuego extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int rondaActual, double pozo) {
+public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int rondaActual, int pozo) {
         lblPartida.setText(partidaActual + "/" + totalPartidas);
         lblRonda.setText(rondaActual + "/3");
-        lblPozo.setText("$" + String.format("%.2f", pozo));
+        lblPozo.setText("$" + String.format("%d", pozo)); 
     }
 
     public void agregarLog(String mensaje) {
@@ -43,17 +43,21 @@ public class VentanaJuego extends javax.swing.JFrame {
     public javax.swing.JButton getBtnSiguienteRonda() {
         return btnSiguienteRonda;
     }
+    public javax.swing.JMenuItem getMenuSalir() {
+        return menuSalir;
+    }
+    
+    public javax.swing.JMenuItem getMenuRanking() {
+        return menuRanking;
+    }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public javax.swing.JMenuItem getMenuHistorial() {
+        return menuHistorial;
+    }
+
+    public javax.swing.JMenuItem getMenuEstadisticas() {
+        return menuEstadisticas;
+    }
     
     
     
