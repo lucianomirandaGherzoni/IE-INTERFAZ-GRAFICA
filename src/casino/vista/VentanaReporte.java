@@ -3,6 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package casino.vista;
+    // --- Importaciones ---
+import java.util.List;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import casino.modelo.dto.EstadisticasDTO;
+import casino.modelo.dto.JugadorDTO;
+import casino.modelo.dto.PartidaResumenDTO;
 
 /**
  *
@@ -39,29 +49,15 @@ public class VentanaReporte extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
+
         btnVolver.setText("Volver al inicio");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(358, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(120, 120, 120))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnVolver)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(btnVolver);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
 
@@ -83,7 +79,7 @@ public class VentanaReporte extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Estadisticas"));
         jPanel2.setPreferredSize(new java.awt.Dimension(200, 277));
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(3, 1, 6, 6));
 
         lblMayorApuesta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblMayorApuesta.setText("Mayor Apuesta: -");
@@ -114,6 +110,58 @@ public class VentanaReporte extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
+
+// --- Métodos Públicos ---
+
+// Carga los jugadores en la tabla de ranking y los ordena por dinero (desc)
+public void cargarRanking(List<JugadorDTO> jugadores) {
+    DefaultTableModel modelo = (DefaultTableModel) tablaRanking.getModel();
+    // En caso de que la tabla no tenga cabeceras
+    if (modelo.getColumnCount() == 0) {
+        modelo.setColumnIdentifiers(new String[]{"Nombre", "Tipo", "Dinero Final", "Victorias"});
+    }
+    modelo.setRowCount(0);
+    for (var j : jugadores) {
+        modelo.addRow(new Object[]{ j.nombre, j.tipo, j.dineroFinal, j.victorias });
+    }
+    // Orden descendente por "Dinero Final" (columna 2)
+    TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) tablaRanking.getRowSorter();
+    if (sorter == null) {
+        sorter = new TableRowSorter<>(tablaRanking.getModel());
+        tablaRanking.setRowSorter(sorter);
+    }
+    sorter.setSortKeys(List.of(new RowSorter.SortKey(2, SortOrder.DESCENDING)));
+    sorter.sort();
+}
+
+// Muestra las estadísticas generales
+public void mostrarEstadisticas(EstadisticasDTO e) {
+    if (e == null) {
+        lblMayorApuesta.setText("Mayor apuesta: –");
+        lblMejorTirada.setText("Mejor puntaje: –");
+        lblVictimas.setText("Víctimas del casino: –");
+        return;
+    }
+    lblMayorApuesta.setText("Mayor apuesta: $" + e.mayorApuesta + " (" + e.jugadorMayorApuesta + ")");
+    lblMejorTirada.setText("Mejor puntaje: " + e.mejorTirada + " (" + e.jugadorMejorTirada + ")");
+    lblVictimas.setText("Víctimas del casino: " + e.victimasCasino);
+}
+
+// Carga las últimas partidas jugadas en el área de texto
+public void cargarHistorial(List<PartidaResumenDTO> partidas) {
+    txtHistorial.setText("");
+    if (partidas == null || partidas.isEmpty()) return;
+    int max = Math.min(5, partidas.size()); // muestra máximo 5 partidas
+    for (int i = Math.max(0, partidas.size() - max); i < partidas.size(); i++) {
+        txtHistorial.append(partidas.get(i).formatoLinea() + "\n");
+    }
+    txtHistorial.setCaretPosition(0);
+}
+
+// Conecta el botón "Volver al inicio" con una acción del controlador
+public void onVolver(Runnable accion) {
+    btnVolver.addActionListener(e -> accion.run());
+}
 
     /**
      * @param args the command line arguments
