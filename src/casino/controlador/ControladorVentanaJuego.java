@@ -353,20 +353,15 @@ public class ControladorVentanaJuego {
         vista.getBtnSiguienteRonda().setEnabled(false);
         vista.getBtnReRoll().setEnabled(false);
 
-// --- INICIO DE LA LÓGICA CORREGIDA ---
-        // 1. Crear la nueva vista de reporte
         VentanaReporte vistaReporte = new VentanaReporte();
-
-        // 2. Obtener las partes que SÍ necesita el constructor desde el modelo
         List<Jugador> jugadores = this.modelo.getJugadores();
         Estadisticas estadisticas = this.modelo.getEstadisticas();
         ArrayList<String> historial = this.modelo.getHistorial();
 
-        // 3. Crear el controlador pasándole los argumentos correctos
         ControladorVentanaReporte controladorReporte = new ControladorVentanaReporte(
                 vistaReporte,
                 jugadores,
-               this.cantidadPartidas, // <--- AÑADIDO AQUÍ
+               this.cantidadPartidas, 
                 estadisticas,
                 historial
         );
@@ -374,7 +369,6 @@ public class ControladorVentanaJuego {
         vistaReporte.setVisible(true);
         this.vista.dispose();
 
-        // --- FIN DE LA LÓGICA CORREGIDA ---
     }
 
     private void salirDelJuego() {
