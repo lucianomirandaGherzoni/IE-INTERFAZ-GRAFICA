@@ -5,7 +5,8 @@
 ✅ VentanaConfiguracion funcionando
 ✅ VentanaJuego - Diseño visual completo
 ✅ VentanaReporte - Estructura creada
-❌ Falta implementar lógica de VentanaJuego y VentanaReporte
+✅ VentanaReporte - lógica creada
+❌ Falta implementar lógica de VentanaReporte
 
 ---
 

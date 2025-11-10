@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
+import casino.vista.VentanaReporte;
+import casino.controlador.ControladorVentanaReporte;
 
 /**
  *
@@ -351,7 +353,28 @@ public class ControladorVentanaJuego {
         vista.getBtnSiguienteRonda().setEnabled(false);
         vista.getBtnReRoll().setEnabled(false);
 
-        // Lógica para abrir VentanaReporte
+// --- INICIO DE LA LÓGICA CORREGIDA ---
+        // 1. Crear la nueva vista de reporte
+        VentanaReporte vistaReporte = new VentanaReporte();
+
+        // 2. Obtener las partes que SÍ necesita el constructor desde el modelo
+        List<Jugador> jugadores = this.modelo.getJugadores();
+        Estadisticas estadisticas = this.modelo.getEstadisticas();
+        ArrayList<String> historial = this.modelo.getHistorial();
+
+        // 3. Crear el controlador pasándole los argumentos correctos
+        ControladorVentanaReporte controladorReporte = new ControladorVentanaReporte(
+                vistaReporte,
+                jugadores,
+               this.cantidadPartidas, // <--- AÑADIDO AQUÍ
+                estadisticas,
+                historial
+        );
+
+        vistaReporte.setVisible(true);
+        this.vista.dispose();
+
+        // --- FIN DE LA LÓGICA CORREGIDA ---
     }
 
     private void salirDelJuego() {
