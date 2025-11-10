@@ -19,6 +19,11 @@ public class CasinoAdministrador {
     private juegoDados juego;
     private RegistroTrampas registroTrampas = new RegistroTrampas();
     
+    public CasinoAdministrador() {
+        this.juego = new juegoDados(); 
+    }
+    
+    
     public Jugador crearJugador(String nombre, int tipo) {
         return switch (tipo) {
             case 1 -> new JugadorNovato(nombre);
@@ -31,6 +36,10 @@ public class CasinoAdministrador {
     
     public void agregarJugador (Jugador jugador){
         jugadores.add(jugador);
+    }
+    
+    public juegoDados getJuego() {
+        return juego;
     }
     
     public void jugar (Estadisticas estadisticas){

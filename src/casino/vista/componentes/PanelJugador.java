@@ -4,17 +4,44 @@
  */
 package casino.vista.componentes;
 
+import casino.modelo.Jugador;
+
 /**
  *
  * @author BANGHO
  */
 public class PanelJugador extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelJugador
-     */
-    public PanelJugador() {
+    private Jugador jugador;
+
+/**
+ * Creates new form PanelJugador
+ * @param jugador El modelo del jugador a mostrar. 
+ */
+    public PanelJugador(Jugador jugador) {
         initComponents();
+        this.jugador = jugador;
+        actualizarDatos(); 
+    }
+
+    /**
+     * Actualiza la información dinámica del panel (dinero, apuesta, dados,
+     * victorias).
+     */
+    public void actualizarDatos() {
+      
+        lblNombre.setText(jugador.getNombre() + " (" + jugador.getApodo() + ")");
+        lblTipoJugador.setText(jugador.obtenerTipoJugador());
+        lblSaldo.setText("$" + String.format("%d", jugador.getDinero()));
+        lblApuesta.setText("Apuesta: $" + String.format("%d", jugador.getApuestaActual()));
+        
+        if (jugador.getResultadoDados() != null && jugador.getResultadoDados().length == 2) {
+            lblDados.setText("[" + jugador.getResultadoDados()[0] + "] [" + jugador.getResultadoDados()[1] + "]");
+        } else {
+            lblDados.setText("[0] [0]");
+        }
+
+        lblVictorias.setText("Victorias: " + jugador.getPartidasGanadas());
     }
 
     /**
@@ -26,19 +53,72 @@ public class PanelJugador extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblNombre = new javax.swing.JLabel();
+        lblTipoJugador = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
+        lblApuesta = new javax.swing.JLabel();
+        lblDados = new javax.swing.JLabel();
+        lblVictorias = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        lblNombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre Jugador"));
+
+        lblTipoJugador.setBorder(javax.swing.BorderFactory.createTitledBorder(" Tipo"));
+
+        lblSaldo.setText("$");
+        lblSaldo.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo"));
+
+        lblApuesta.setText("$");
+        lblApuesta.setBorder(javax.swing.BorderFactory.createTitledBorder("Apuesta"));
+
+        lblDados.setText("[0] [0]");
+        lblDados.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
+
+        lblVictorias.setText("0");
+        lblVictorias.setBorder(javax.swing.BorderFactory.createTitledBorder("Victorias"));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTipoJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblApuesta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblDados, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(lblVictorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTipoJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDados, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblVictorias, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblApuesta;
+    private javax.swing.JLabel lblDados;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblSaldo;
+    private javax.swing.JLabel lblTipoJugador;
+    private javax.swing.JLabel lblVictorias;
     // End of variables declaration//GEN-END:variables
 }

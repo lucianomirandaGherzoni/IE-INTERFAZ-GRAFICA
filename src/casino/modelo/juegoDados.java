@@ -5,8 +5,7 @@
 package casino.modelo;
 import java.util.*;
 
-class juegoDados {
-    //private Dado dado = new Dado();
+public class juegoDados {
     private final Dado dado = new Dado();
     
     public int lanzarDados(Jugador jugador, JugadorCasino casino, RegistroTrampas registro, Estadisticas estadisticas ) {
@@ -54,6 +53,8 @@ class juegoDados {
             }
         }
         
+        
+        jugador.setResultadoDados(new int[]{dado1, dado2});
         return suma;
     }
 }

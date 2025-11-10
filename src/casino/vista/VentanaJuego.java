@@ -17,6 +17,50 @@ public class VentanaJuego extends javax.swing.JFrame {
         initComponents();
     }
 
+public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int rondaActual, int pozo) {
+        lblPartida.setText(partidaActual + "/" + totalPartidas);
+        lblRonda.setText(rondaActual + "/3");
+        lblPozo.setText("$" + String.format("%d", pozo)); 
+    }
+
+    public void agregarLog(String mensaje) {
+        txtLog.append(mensaje + "\n");
+        // Auto-scroll
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+    }
+
+    public javax.swing.JPanel getPanelJugadores() {
+        return panelJugadores;
+    }
+
+    public void resetearVista() {
+        txtLog.setText("");
+        panelJugadores.removeAll();
+        panelJugadores.revalidate();
+        panelJugadores.repaint();
+    }
+
+    public javax.swing.JButton getBtnSiguienteRonda() {
+        return btnSiguienteRonda;
+    }
+    public javax.swing.JMenuItem getMenuSalir() {
+        return menuSalir;
+    }
+    
+    public javax.swing.JMenuItem getMenuRanking() {
+        return menuRanking;
+    }
+
+    public javax.swing.JMenuItem getMenuHistorial() {
+        return menuHistorial;
+    }
+
+    public javax.swing.JMenuItem getMenuEstadisticas() {
+        return menuEstadisticas;
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,10 +77,14 @@ public class VentanaJuego extends javax.swing.JFrame {
         lblPartidaTexto = new javax.swing.JLabel();
         lblRondaTexto = new javax.swing.JLabel();
         lblRonda = new javax.swing.JLabel();
-        panelJugadores = new javax.swing.JPanel();
         panelLog = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLog = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        scrollPannel = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        panelJugadores = new javax.swing.JPanel();
+        btnSiguienteRonda = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuGuardarPartida = new javax.swing.JMenuItem();
@@ -78,15 +126,12 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         getContentPane().add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 440, 70));
 
-        panelJugadores.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado de jugadores"));
-        panelJugadores.setLayout(new java.awt.GridLayout(1, 4));
-        getContentPane().add(panelJugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 440, 210));
-
         panelLog.setBorder(javax.swing.BorderFactory.createTitledBorder("Log de Eventos"));
 
         txtLog.setEditable(false);
         txtLog.setColumns(40);
         txtLog.setRows(8);
+        jScrollPane1.setViewportView(txtLog);
 
         javax.swing.GroupLayout panelLogLayout = new javax.swing.GroupLayout(panelLog);
         panelLog.setLayout(panelLogLayout);
@@ -105,7 +150,39 @@ public class VentanaJuego extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 440, 180));
+        getContentPane().add(panelLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 440, 180));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, -1, -1));
+
+        panelJugadores.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Jugadores"));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        scrollPannel.setViewportView(jPanel1);
+
+        getContentPane().add(scrollPannel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 440, 210));
+
+        btnSiguienteRonda.setText("Siguiente Ronda");
+        btnSiguienteRonda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteRondaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSiguienteRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 160, -1));
 
         jMenu1.setText("Partida");
 
@@ -134,6 +211,10 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSiguienteRondaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteRondaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSiguienteRondaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,10 +252,13 @@ public class VentanaJuego extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSiguienteRonda;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblPartida;
     private javax.swing.JLabel lblPartidaTexto;
     private javax.swing.JLabel lblPozo;
@@ -189,6 +273,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     private javax.swing.JPanel panelJugadores;
     private javax.swing.JPanel panelLog;
     private javax.swing.JPanel panelSuperior;
+    private javax.swing.JScrollPane scrollPannel;
     private javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
 }
