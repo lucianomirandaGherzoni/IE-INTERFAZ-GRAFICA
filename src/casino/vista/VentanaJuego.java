@@ -11,12 +11,9 @@ import casino.modelo.PartidaModelo;
  * @author BANGHO
  */
 public class VentanaJuego extends javax.swing.JFrame {
-     private final PartidaModelo modelo;
      
-     public VentanaJuego(PartidaModelo modelo) {
-        this.modelo = modelo;
-        initComponents();
-    }
+    private PartidaModelo modelo = new PartidaModelo();
+
      
     /**
      * Creates new form VentanaJuego
@@ -234,7 +231,7 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
     }//GEN-LAST:event_btnSiguienteRondaActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-       ControladorVentanaReporte ctrlReporte = new ControladorVentanaReporte(modelo);
+        ControladorVentanaReporte ctrlReporte = new ControladorVentanaReporte(modelo);
     ctrlReporte.mostrar();
     }//GEN-LAST:event_btnReportesActionPerformed
 
