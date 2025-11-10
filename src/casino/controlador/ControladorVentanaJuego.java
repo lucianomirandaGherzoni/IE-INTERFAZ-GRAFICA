@@ -363,7 +363,6 @@ public class ControladorVentanaJuego {
         }
 
         actualizarPanelesJugadores();
-
         modelo.incrementarRondaActual();
         modelo.setJugadorTurnoIndex(0);
         
@@ -384,6 +383,16 @@ public class ControladorVentanaJuego {
             vista.getBtnSiguienteRonda().setText("Iniciar Ronda " + modelo.getRondaActual());
         }
 
+        //guardado automatico
+        try {
+            // Llama al gestor que ya existe y guarda el modelo actual
+            // con un nombre de archivo predefinido.
+            gestorPersistencia.guardarPartida(this.modelo, "autosave.sav");
+            vista.agregarLog("...Partida guardada automáticamente...");
+        } catch (Exception e) {
+            vista.agregarLog("Error en el guardado automático: " + e.getMessage());
+        }
+        
         vista.getBtnSiguienteRonda().setEnabled(true);
     }
 
