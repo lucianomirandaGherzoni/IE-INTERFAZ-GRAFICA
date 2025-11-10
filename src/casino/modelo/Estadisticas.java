@@ -6,7 +6,7 @@ package casino.modelo;
 
 import java.util.ArrayList;
 
-public class Estadisticas {
+public class Estadisticas  implements java.io.Serializable{
     private int mejorPuntaje = 0;
     private String jugadorMejorPuntaje = "";
     private int mayorApuesta = 0;

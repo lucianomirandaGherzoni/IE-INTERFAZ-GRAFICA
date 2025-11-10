@@ -14,7 +14,7 @@ import casino.modelo.JugadorExperto;
 import casino.modelo.JugadorCasino;
 import java.util.ArrayList;
 
-public class CasinoAdministrador {
+public class CasinoAdministrador  implements java.io.Serializable{
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private juegoDados juego;
     private RegistroTrampas registroTrampas = new RegistroTrampas();

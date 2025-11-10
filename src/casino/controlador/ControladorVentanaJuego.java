@@ -26,6 +26,7 @@ public class ControladorVentanaJuego {
     private final PartidaModelo modelo;
     private final int cantidadPartidas;
     private final List<PanelJugador> panelesJugadores;
+    private final GestorPersistencia gestorPersistencia;
 
     // Variables de Estado del Juego
     private int partidaActual = 1;
@@ -48,7 +49,8 @@ public class ControladorVentanaJuego {
         this.cantidadPartidas = cantidadPartidas;
         this.modelo = new PartidaModelo();
         this.panelesJugadores = new ArrayList<>();
-
+        this.gestorPersistencia = new GestorPersistencia();
+        
         for (Jugador j : jugadores) {
             this.modelo.agregarJugador(j);
         }
@@ -76,8 +78,24 @@ public class ControladorVentanaJuego {
         vista.getMenuRanking().addActionListener(e -> mostrarRanking());
         vista.getMenuHistorial().addActionListener(e -> mostrarHistorial());
         vista.getMenuEstadisticas().addActionListener(e -> mostrarEstadisticas());
+        vista.getMenuGuardarPartida().addActionListener(e -> clicGuardarPartida());
     }
 
+    
+    private void clicGuardarPartida() {
+    // Esto abre una ventana para que el usuario elija dónde guardar
+    javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+    chooser.setDialogTitle("Guardar partida");
+    chooser.setSelectedFile(new java.io.File("mi_partida.sav"));
+
+    if (chooser.showSaveDialog(vista) == javax.swing.JFileChooser.APPROVE_OPTION) {
+        String archivo = chooser.getSelectedFile().getAbsolutePath();
+
+        gestorPersistencia.guardarPartida(this.modelo, archivo);
+
+        JOptionPane.showMessageDialog(vista, "Partida guardada exitosamente en " + archivo);
+    }
+}
     private void crearPanelesJugadores() {
         vista.getPanelJugadores().removeAll();
 
@@ -353,6 +371,8 @@ public class ControladorVentanaJuego {
         vista.getBtnSiguienteRonda().setEnabled(false);
         vista.getBtnReRoll().setEnabled(false);
 
+        gestorPersistencia.guardarHistorial(this.modelo.getHistorial());
+        
         VentanaReporte vistaReporte = new VentanaReporte();
         List<Jugador> jugadores = this.modelo.getJugadores();
         Estadisticas estadisticas = this.modelo.getEstadisticas();
@@ -361,7 +381,7 @@ public class ControladorVentanaJuego {
         ControladorVentanaReporte controladorReporte = new ControladorVentanaReporte(
                 vistaReporte,
                 jugadores,
-               this.cantidadPartidas, 
+                this.cantidadPartidas,
                 estadisticas,
                 historial
         );

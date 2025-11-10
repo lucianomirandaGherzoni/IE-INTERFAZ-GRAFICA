@@ -5,7 +5,7 @@
 package casino.modelo;
 import java.util.Random;
 
-public class Dado {  
+public class Dado implements java.io.Serializable {  
     //private Random random;
     private final Random random;
     

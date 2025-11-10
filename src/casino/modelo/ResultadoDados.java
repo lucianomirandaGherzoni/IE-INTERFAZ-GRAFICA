@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author luciano
  */
-public class ResultadoDados {
+public class ResultadoDados implements java.io.Serializable {
     
     private final int dado1;
     private final int dado2;

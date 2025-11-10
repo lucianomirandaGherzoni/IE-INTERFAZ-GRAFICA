@@ -4,7 +4,7 @@
  */
 package casino.modelo;
 
-public abstract class Jugador {
+public abstract class Jugador implements java.io.Serializable {
     public String nombre;
     public String apodo;
     public int dinero;
