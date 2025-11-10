@@ -11,6 +11,7 @@ import java.util.List;
  *
  * @author BANGHO
  */
+// Asegúrate de que todas tus clases de modelo implementen java.io.Serializable
 public class PartidaModelo implements java.io.Serializable {
 
     private ArrayList<String> historial;
@@ -18,10 +19,12 @@ public class PartidaModelo implements java.io.Serializable {
     private Estadisticas estadisticas;
     private List<Jugador> jugadores;
     private CasinoAdministrador casino;
+    
+    private int cantidadPartidas; 
 
     private int partidaActual;
     private int rondaActual;
-    public static final int RONDAS_POR_PARTIDA = 3; // Es una constante, puede ser pública
+    public static final int RONDAS_POR_PARTIDA = 3; 
 
     // Estado de la Ronda
     private int jugadorTurnoIndex;
@@ -42,6 +45,8 @@ public class PartidaModelo implements java.io.Serializable {
         this.jugadores = new ArrayList<>();
         this.casino = new CasinoAdministrador();
 
+        // --- INICIALIZACIÓN DE CAMPOS ---
+        this.cantidadPartidas = 0; // Inicializado
         this.partidaActual = 1;
         this.rondaActual = 1;
         this.jugadorTurnoIndex = 0;
@@ -72,6 +77,15 @@ public class PartidaModelo implements java.io.Serializable {
 
     public int getContadorPartidas() {
         return contadorPartidas;
+    }
+    
+   
+    public int getCantidadPartidas() {
+        return cantidadPartidas;
+    }
+
+    public void setCantidadPartidas(int cantidadPartidas) {
+        this.cantidadPartidas = cantidadPartidas;
     }
 
     //Métodos de estadísticas

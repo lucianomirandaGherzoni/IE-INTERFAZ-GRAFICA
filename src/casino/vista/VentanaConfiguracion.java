@@ -22,6 +22,10 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
         initComponents();
         this.controlador = new ControladorConfiguracion(this);
     }
+    
+    public javax.swing.JButton getBtnCargarPartida() {
+    return btnCargarPartida;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,8 +185,7 @@ public class VentanaConfiguracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarJugadorActionPerformed
 
     private void btnCargarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarPartidaActionPerformed
-        mostrarMensaje("Funcionalidad en desarrollo");
-        //Todavía no está porque implementa carga de partidas guardad y requiere implementar GestorPersistencia
+
     }//GEN-LAST:event_btnCargarPartidaActionPerformed
 
     private void btnAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugadorActionPerformed
