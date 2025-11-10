@@ -3,13 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package casino.vista;
+import casino.controlador.ControladorVentanaReporte;
+import casino.modelo.PartidaModelo;  
 
 /**
  *
  * @author BANGHO
  */
 public class VentanaJuego extends javax.swing.JFrame {
-
+     private final PartidaModelo modelo;
+     
+     public VentanaJuego(PartidaModelo modelo) {
+        this.modelo = modelo;
+        initComponents();
+    }
+     
     /**
      * Creates new form VentanaJuego
      */
@@ -85,6 +93,7 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
         jPanel1 = new javax.swing.JPanel();
         panelJugadores = new javax.swing.JPanel();
         btnSiguienteRonda = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuGuardarPartida = new javax.swing.JMenuItem();
@@ -184,6 +193,14 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
         });
         getContentPane().add(btnSiguienteRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 160, -1));
 
+        btnReportes.setText("Ver Reportes Final");
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
         jMenu1.setText("Partida");
 
         menuGuardarPartida.setText("Guardar Partida");
@@ -215,6 +232,11 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
     private void btnSiguienteRondaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteRondaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSiguienteRondaActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+       ControladorVentanaReporte ctrlReporte = new ControladorVentanaReporte(modelo);
+    ctrlReporte.mostrar();
+    }//GEN-LAST:event_btnReportesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +274,7 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnSiguienteRonda;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
