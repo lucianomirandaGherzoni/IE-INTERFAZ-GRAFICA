@@ -59,8 +59,12 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
         return menuEstadisticas;
     }
     
-    
-    
+    public javax.swing.JButton getBtnReRoll() {
+        return btnReRoll;
+    }
+    public javax.swing.JMenuItem getMenuGuardarPartida() {
+        return menuGuardarPartida;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,6 +89,7 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
         jPanel1 = new javax.swing.JPanel();
         panelJugadores = new javax.swing.JPanel();
         btnSiguienteRonda = new javax.swing.JButton();
+        btnReRoll = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuGuardarPartida = new javax.swing.JMenuItem();
@@ -182,7 +187,15 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
                 btnSiguienteRondaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSiguienteRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 160, -1));
+        getContentPane().add(btnSiguienteRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 160, -1));
+
+        btnReRoll.setText("Usar Re-Roll");
+        btnReRoll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReRollActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReRoll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jMenu1.setText("Partida");
 
@@ -215,6 +228,10 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
     private void btnSiguienteRondaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteRondaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSiguienteRondaActionPerformed
+
+    private void btnReRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReRollActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReRollActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +269,7 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReRoll;
     private javax.swing.JButton btnSiguienteRonda;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

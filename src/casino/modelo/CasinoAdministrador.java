@@ -14,7 +14,7 @@ import casino.modelo.JugadorExperto;
 import casino.modelo.JugadorCasino;
 import java.util.ArrayList;
 
-public class CasinoAdministrador {
+public class CasinoAdministrador  implements java.io.Serializable{
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private juegoDados juego;
     private RegistroTrampas registroTrampas = new RegistroTrampas();
@@ -87,7 +87,16 @@ public class CasinoAdministrador {
             ArrayList<Jugador> ganadores = new ArrayList<>();
             
             for (Jugador j : jugadoresActivos) {
-                int puntaje = juego.lanzarDados(j, casino, registroTrampas, estadisticas);
+   
+                ResultadoDados resultado = juego.lanzarDados(j, casino, registroTrampas, estadisticas);
+                
+                for(String msg : resultado.getMensajes()){
+                    System.out.println(msg);
+                }
+                
+     
+                int puntaje = resultado.getSuma(); 
+   
                 estadisticas.registrarPuntaje(j.getApodo(), puntaje);
                 
                 if (puntaje > mejorPuntaje) {
