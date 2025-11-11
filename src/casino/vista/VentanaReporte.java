@@ -3,6 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package casino.vista;
+    // --- Importaciones ---
+import java.util.List;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -26,21 +33,147 @@ public class VentanaReporte extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnVolver = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaRanking = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        lblMayorApuesta = new javax.swing.JLabel();
+        lblMejorTirada = new javax.swing.JLabel();
+        lblVictimas = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtHistorial = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
+
+        btnVolver.setText("Volver al inicio");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolver);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        tablaRanking.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablaRanking.setFillsViewportHeight(true);
+        jScrollPane1.setViewportView(tablaRanking);
+
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Estadísticas"));
+        jPanel2.setPreferredSize(new java.awt.Dimension(200, 277));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 1, 6, 6));
+
+        lblMayorApuesta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblMayorApuesta.setText("Mayor Apuesta: -");
+        jPanel2.add(lblMayorApuesta);
+
+        lblMejorTirada.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblMejorTirada.setText("Mejor Puntaje: -");
+        jPanel2.add(lblMejorTirada);
+
+        lblVictimas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblVictimas.setText("Victimas del casino: -");
+        jPanel2.add(lblVictimas);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Historial (ultimas partidas)"));
+
+        txtHistorial.setEditable(false);
+        txtHistorial.setColumns(40);
+        txtHistorial.setRows(6);
+        jScrollPane2.setViewportView(txtHistorial);
+
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+// --- Métodos Públicos ---
+
+// Carga los jugadores en la tabla de ranking y los ordena por dinero (desc)
+public void cargarRanking(java.util.List<casino.modelo.Jugador> jugadores) {
+    javax.swing.table.DefaultTableModel modelo =
+            (javax.swing.table.DefaultTableModel) tablaRanking.getModel();
+
+    // Encabezados correctos SIEMPRE
+    modelo.setColumnIdentifiers(new String[]{"Nombre", "Tipo", "Dinero Final", "Victorias"});
+    modelo.setRowCount(0);
+
+    // Ordenar por dinero DESC con tus getters reales
+    java.util.List<casino.modelo.Jugador> ordenados = new java.util.ArrayList<>(jugadores);
+    ordenados.sort((a, b) -> Integer.compare(b.getDinero(), a.getDinero()));
+
+    for (casino.modelo.Jugador j : ordenados) {
+        String tipo = j.getClass().getSimpleName();         // Novato / Experto / VIP / Casino
+        int victorias = j.getPartidasGanadas();              // ← en tu modelo este es el nombre
+        modelo.addRow(new Object[]{ j.getNombre(), tipo, j.getDinero(), victorias });
+    }
+
+    // Ordenador de tabla (por si el usuario clickea encabezados)
+    javax.swing.table.TableRowSorter<javax.swing.table.TableModel> sorter =
+            new javax.swing.table.TableRowSorter<>(tablaRanking.getModel());
+    tablaRanking.setRowSorter(sorter);
+    sorter.setSortKeys(java.util.List.of(
+            new javax.swing.RowSorter.SortKey(2, javax.swing.SortOrder.DESCENDING) // col Dinero
+    ));
+    sorter.sort();
+}
+
+// Muestra las estadísticas generales
+
+public void mostrarEstadisticas(casino.modelo.Estadisticas e) {
+    if (e == null) {
+        lblMayorApuesta.setText("Mayor apuesta: –");
+        lblMejorTirada.setText("Mejor puntaje: –");
+        lblVictimas.setText("Víctimas del casino: –");
+        return;
+    }
+    lblMayorApuesta.setText("Mayor apuesta: $" + e.getMayorApuesta()
+            + " (" + e.getJugadorMayorApuesta() + ")");
+
+    lblMejorTirada.setText("Mejor puntaje: " + e.getMejorPuntaje()
+            + " (" + e.getJugadorMejorPuntaje() + ")");
+
+    // Tu método devuelve un String con “nombres (Total: N)” o “Ninguna”
+    lblVictimas.setText("Víctimas del casino: " + e.getVictimasDelCasino());
+}
+// Carga las últimas partidas jugadas en el área de texto
+
+public void cargarHistorial(java.util.List<String> lineas) {
+    txtHistorial.setText("");
+    if (lineas == null || lineas.isEmpty()) return;
+
+    int max = Math.min(5, lineas.size());
+    for (int i = Math.max(0, lineas.size() - max); i < lineas.size(); i++) {
+        txtHistorial.append(lineas.get(i) + "\n");
+    }
+    txtHistorial.setCaretPosition(0);
+}
+
+// Conecta el botón "Volver al inicio" con una acción del controlador
+public void onVolver(Runnable accion) {
+    btnVolver.addActionListener(e -> accion.run());
+}
 
     /**
      * @param args the command line arguments
@@ -78,5 +211,15 @@ public class VentanaReporte extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblMayorApuesta;
+    private javax.swing.JLabel lblMejorTirada;
+    private javax.swing.JLabel lblVictimas;
+    private javax.swing.JTable tablaRanking;
+    private javax.swing.JTextArea txtHistorial;
     // End of variables declaration//GEN-END:variables
 }
