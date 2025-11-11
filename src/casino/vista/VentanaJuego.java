@@ -62,7 +62,9 @@ public void actualizarPanelSuperior(int partidaActual, int totalPartidas, int ro
     public javax.swing.JButton getBtnReRoll() {
         return btnReRoll;
     }
-    
+    public javax.swing.JMenuItem getMenuGuardarPartida() {
+        return menuGuardarPartida;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

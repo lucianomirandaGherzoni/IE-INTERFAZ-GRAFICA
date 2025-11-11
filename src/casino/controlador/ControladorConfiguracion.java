@@ -1,9 +1,9 @@
-package casino.controlador;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
+package casino.controlador;
 
 import casino.modelo.*;
 import casino.vista.VentanaConfiguracion;
@@ -12,120 +12,132 @@ import casino.controlador.ControladorVentanaJuego;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+
 
 /**
  *
  * @author BANGHO
  */
+
 public class ControladorConfiguracion {
     private VentanaConfiguracion vista;
     private DefaultListModel<String> modeloLista;
     private List<Jugador> jugadores;
     
+    private GestorPersistencia gestorPersistencia;
+    
+    // Constructor: Inicializa el controlador, listas y gestor.
     public ControladorConfiguracion(VentanaConfiguracion vista) {
         this.vista = vista;
         this.modeloLista = new DefaultListModel<>();
         this.jugadores = new ArrayList<>();
+        
+        this.gestorPersistencia = new GestorPersistencia();
+        
         inicializarVista();
     }
     
     
+    // Configura la JList de la vista.
     private void inicializarVista() {
-        // Asignar el modelo a la lista
         vista.getLstJugadores().setModel(modeloLista);
+        vista.getBtnCargarPartida().addActionListener(e -> clicCargarPartida());
     }
     
+    // Maneja el clic para cargar una partida guardada.
+    private void clicCargarPartida() {
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+        chooser.setDialogTitle("Cargar partida");
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Partida Guardada (.sav)", "sav"));
+
+        if (chooser.showOpenDialog(vista) == javax.swing.JFileChooser.APPROVE_OPTION) {
+            String archivo = chooser.getSelectedFile().getAbsolutePath();
+            
+            PartidaModelo modeloCargado = gestorPersistencia.cargarPartida(archivo);
+            
+            if (modeloCargado != null) {
+                
+                vista.dispose();
+                
+                VentanaJuego vistaJuego = new VentanaJuego();
+                
+                ControladorVentanaJuego ctrlJuego = new ControladorVentanaJuego(
+                        vistaJuego, 
+                        modeloCargado
+                ); 
+                
+                ctrlJuego.iniciarPartidaCargada(); 
+            }
+        }
+    }
+    
+    // Valida y agrega un nuevo jugador a la lista.
     public void agregarJugador(String nombre, String apodo, String tipo) {
-        // Validar nombre
         if (nombre == null || nombre.trim().isEmpty()) {
             vista.mostrarError("El nombre no puede estar vacío");
             return;
         }
-        
-        // Validar apodo (3-10 caracteres, solo letras y espacios)
         if (!validarApodo(apodo)) {
             vista.mostrarError("El apodo debe tener entre 3-10 caracteres, solo letras y espacios");
             return;
         }
-        
-        // Validar que no haya más de 4 jugadores
         if (jugadores.size() >= 4) {
             vista.mostrarError("Máximo 4 jugadores permitidos");
             return;
         }
-        
-        // Crear jugador según tipo
         Jugador jugador = crearJugador(nombre, tipo);
         jugador.setApodo(apodo);
-        
-        // Agregar a la lista
         jugadores.add(jugador);
         modeloLista.addElement((jugadores.size()) + ". " + nombre + " (" + apodo + ") - " + tipo);
-        
-        // Limpiar campos
         vista.limpiarCampos();
-        
         vista.mostrarMensaje("Jugador agregado correctamente");
     }
     
+    // Elimina un jugador seleccionado de la lista.
     public void eliminarJugador(int indice) {
         if (indice == -1) {
             vista.mostrarError("Selecciona un jugador para eliminar");
             return;
         }
-        
         jugadores.remove(indice);
         modeloLista.remove(indice);
-        
-        // Reordenar números
         for (int i = 0; i < modeloLista.size(); i++) {
             String elemento = modeloLista.get(i);
-            // Quitar el número viejo y poner el nuevo
             String sinNumero = elemento.substring(elemento.indexOf(".") + 2);
             modeloLista.set(i, (i + 1) + ". " + sinNumero);
         }
-        
         vista.mostrarMensaje("Jugador eliminado");
     }
     
+    // Valida e inicia una nueva partida.
     public void iniciarJuego(int dineroInicial, int cantidadPartidas) {
-        // Validar cantidad de jugadores
         if (jugadores.size() < 2) {
             vista.mostrarError("Se necesitan al menos 2 jugadores para comenzar");
             return;
         }
-        
         if (jugadores.size() > 4) {
             vista.mostrarError("Máximo 4 jugadores permitidos");
             return;
         }
-        
-        // Validar dinero inicial
         if (dineroInicial <= 0) {
             vista.mostrarError("El dinero inicial debe ser mayor a 0");
             return;
         }
-        
-        // Configurar dinero inicial de todos los jugadores
         for (Jugador j : jugadores) {
             j.setDinero(dineroInicial);
         }
-        
-        // Crea la Vista
         VentanaJuego ventanaJuego = new VentanaJuego();
-        
-        //Crear el Controlador y pasarle los datos
         ControladorVentanaJuego controlJuego = new ControladorVentanaJuego(
             ventanaJuego, 
-            this.jugadores,  // <-- Le pasamos los jugadores
-            cantidadPartidas // <-- Le pasamos las partidas
+            this.jugadores,
+            cantidadPartidas
         );
         controlJuego.iniciar();
-        
-        // Cerrar ventana de configuración
         vista.dispose();
     }
     
+    // Muestra confirmación y cierra la aplicación.
     public void salir() {
         int confirmacion = JOptionPane.showConfirmDialog(
             vista,
@@ -133,12 +145,12 @@ public class ControladorConfiguracion {
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION
         );
-        
         if (confirmacion == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }
     
+    // Valida el formato del apodo (longitud y caracteres).
     private boolean validarApodo(String apodo) {
         if (apodo == null || apodo.isEmpty()) {
             return false;
@@ -146,6 +158,7 @@ public class ControladorConfiguracion {
         return apodo.length() >= 3 && apodo.length() <= 10 && apodo.matches("[a-zA-Z\\s]+");
     }
     
+    // Crea una instancia del tipo de Jugador (Novato, VIP, etc.).
     private Jugador crearJugador(String nombre, String tipo) {
         return switch (tipo) {
             case "Novato" -> new JugadorNovato(nombre);

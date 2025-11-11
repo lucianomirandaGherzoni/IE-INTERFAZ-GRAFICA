@@ -7,7 +7,7 @@ package casino.modelo;
 import java.util.ArrayList;
 
 
-public class RegistroTrampas {
+public class RegistroTrampas implements java.io.Serializable{
     private ArrayList <String> trampas;
 
     public RegistroTrampas() {

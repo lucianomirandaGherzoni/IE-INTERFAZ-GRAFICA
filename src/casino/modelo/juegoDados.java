@@ -6,7 +6,7 @@ package casino.modelo;
 
 import java.util.*;
 
-public class juegoDados {
+public class juegoDados implements java.io.Serializable {
 
     private final Dado dado = new Dado();
 
